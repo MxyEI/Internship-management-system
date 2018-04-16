@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 指定 MyBatis 所用日志的具体实现，未指定时将自动查找 -->
+		<setting name="logImpl" value="LOG4J" />
+		<!-- 启用二级缓存 -->
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	<typeAliases>
+		<!-- 类型别名是为 Java 类型设置一个短的名字。
+		它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余
+		扫描com.shixi.entity下的类，
+		在没有注解(@Alias("xx"))的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名 -->
+		<package name="com.shixi.entity" />
+	</typeAliases>
+</configuration>
