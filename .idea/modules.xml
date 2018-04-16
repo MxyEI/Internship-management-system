@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GraduateInternship.iml" filepath="$PROJECT_DIR$/GraduateInternship.iml" />
+      <module fileurl="file://$PROJECT_DIR$/graduateinternship/graduateinternship.iml" filepath="$PROJECT_DIR$/graduateinternship/graduateinternship.iml" />
+    </modules>
+  </component>
+</project>
