@@ -34,7 +34,7 @@
 	<resultMap extends="CompanyResultMap" id="CompanyRecruitResultMap"
 		type="com.shixi.entity.vo.CompanyVO">
 		<association property="recruit" javaType="com.shixi.entity.Recruit">
-			<id column="company_id" property="id" />
+			<id column="companyid" property="id" />
 			<result column="rId" property="id" />
 			<result column="rAddress" property="address" />
 			<result column="rMotoley" property="motoley" />
@@ -164,7 +164,7 @@
 		resultType="Long">
 		select count(*)
 		from company c inner join recruit r on
-		c.id=r.company_id
+		c.id=r.companyid
 		<where>
 			<if test="id != null">
 				and c.id =#{id}

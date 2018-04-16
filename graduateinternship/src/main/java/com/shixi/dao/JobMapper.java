@@ -7,21 +7,21 @@ import com.shixi.entity.Job;
 
 /**
  * @Description: 岗位信息Mapper
- * @author: husb
+ * @author: hw
  * @date: 2018年4月1日 下午1:00:06
  */
 public interface JobMapper {
 
 	/**
 	 * @Description: 根据岗位名模糊查询岗位信息
-	 * @author: husb
+	 * @author: hw
 	 * @date: 2018年4月1日 下午1:00:25
 	 */
 	List<Job> selectJobsByName(Map<String, Object> map);
 
 	/**
 	 * @Description: 根据岗位名模糊查询岗位数量
-	 * @author: husb
+	 * @author: hw
 	 * @date: 2018年4月1日 下午1:00:25
 	 */
 	Long getTotalJobsByName(Map<String, Object> map);

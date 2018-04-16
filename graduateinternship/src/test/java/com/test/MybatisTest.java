@@ -49,7 +49,7 @@ public class MybatisTest {
 
 	/**
 	 * @Description: 更新用户信息
-	 * @author: husb
+	 * @author: hw
 	 * @throws Exception
 	 * @date: 2018年3月28日 下午2:36:20
 	 */

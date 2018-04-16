@@ -68,7 +68,7 @@
 				id,
 			</if>
 			<if test="companyId != null">
-				company_id,
+				companyid,
 			</if>
 			<if test="name != null">
 				name,

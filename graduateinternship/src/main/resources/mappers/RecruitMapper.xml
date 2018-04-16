@@ -3,7 +3,7 @@
 <mapper namespace="com.shixi.dao.RecruitMapper">
 	<resultMap id="BaseResultMap" type="com.shixi.entity.Recruit">
 		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="company_id" jdbcType="INTEGER" property="companyId" />
+		<result column="companyid" jdbcType="INTEGER" property="companyId" />
 		<result column="address" jdbcType="VARCHAR" property="address" />
 		<result column="startTime" jdbcType="VARCHAR" property="startTime" />
 		<result column="endTime" jdbcType="VARCHAR" property="endTime" />
@@ -22,7 +22,7 @@
 		<result column="motoley" jdbcType="LONGVARCHAR" property="motoley" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, company_id, address, startTime, endTime, contractUser,
+		id, companyid, address, startTime, endTime, contractUser,
 		contractNumber, contractEmail,
 		contractAddress,sendResumeUrl,
 		gmtCreate, gmtModify, dr,lapse
@@ -46,7 +46,7 @@
 		,
 		<include refid="Blob_Column_List" />
 		from recruit
-		where company_id = #{id,jdbcType=INTEGER}
+		where companyid = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
@@ -55,7 +55,7 @@
 	</delete>
 	<insert id="insert" parameterType="com.shixi.entity.Recruit">
 		insert into recruit (id,
-		company_id, address,
+		companyid, address,
 		startTime, endTime, contractUser,
 		contractNumber,
 		contractEmail, contractAddress,sendResumeUrl,
@@ -85,7 +85,7 @@
 				id,
 			</if>
 			<if test="companyId != null">
-				company_id,
+				companyid,
 			</if>
 			<if test="address != null">
 				address,
@@ -179,7 +179,7 @@
 		update recruit
 		<set>
 			<if test="companyId != null">
-				company_id = #{companyId,jdbcType=INTEGER},
+				companyid = #{companyId,jdbcType=INTEGER},
 			</if>
 			<if test="address != null">
 				address = #{address,jdbcType=VARCHAR},
@@ -226,7 +226,7 @@
 	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shixi.entity.Recruit">
 		update
 		recruit
-		set company_id = #{companyId,jdbcType=INTEGER},
+		set companyid = #{companyId,jdbcType=INTEGER},
 		address =
 		#{address,jdbcType=VARCHAR},
 		startTime = #{startTime,jdbcType=VARCHAR},
@@ -256,7 +256,7 @@
 	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.Recruit">
 		update recruit
 		set
-		company_id = #{companyId,jdbcType=INTEGER},
+		companyid = #{companyId,jdbcType=INTEGER},
 		address =
 		#{address,jdbcType=VARCHAR},
 		startTime = #{startTime,jdbcType=VARCHAR},

@@ -4,7 +4,7 @@ import com.shixi.entity.Score;
 
 /**
  * @Description: 评价Mapper
- * @author: husb
+ * @author: hw
  * @date: 2018年4月1日 下午12:55:23
  */
 public interface ScoreMapper {
