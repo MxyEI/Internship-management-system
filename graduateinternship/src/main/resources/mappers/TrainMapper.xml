@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.TrainMapper">
+	<resultMap id="BaseResultMap" type="com.shixi.entity.Train">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="companyid" jdbcType="INTEGER" property="companyId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="teacher" jdbcType="VARCHAR" property="teacher" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="number" jdbcType="INTEGER" property="number" />
+		<result column="startTime" jdbcType="VARCHAR" property="startTime" />
+		<result column="endTime" jdbcType="VARCHAR" property="endTime" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.shixi.entity.Train">
+		<result column="content" jdbcType="LONGVARCHAR" property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, companyid, title, teacher, address, number, startTime,
+		endTime,
+		gmtCreate, gmtModify,
+		dr
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from train
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.shixi.entity.Train">
+		insert into train (id,
+		companyid, title,
+		teacher, address, number,
+		startTime, endTime,
+		gmtCreate,
+		gmtModify, dr, content
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{companyId,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{teacher,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{number,jdbcType=INTEGER},
+		#{startTime,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{gmtCreate,jdbcType=VARCHAR},
+		#{gmtModify,jdbcType=VARCHAR}, #{dr,jdbcType=BIT},
+		#{content,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.shixi.entity.Train">
+		insert into train
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="companyId != null">
+				companyid,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="teacher != null">
+				teacher,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="startTime != null">
+				startTime,
+			</if>
+			<if test="endTime != null">
+				endTime,
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate,
+			</if>
+			<if test="gmtModify != null">
+				gmtModify,
+			</if>
+			<if test="dr != null">
+				dr,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher != null">
+				#{teacher,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=INTEGER},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				#{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=BIT},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.Train">
+		update train
+		<set>
+			<if test="companyId != null">
+				companyid = #{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher != null">
+				teacher = #{teacher,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=INTEGER},
+			</if>
+			<if test="startTime != null">
+				startTime = #{startTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				endTime = #{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				gmtModify = #{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				dr = #{dr,jdbcType=BIT},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shixi.entity.Train">
+		update
+		train
+		set companyid = #{companyId,jdbcType=INTEGER},
+		title =
+		#{title,jdbcType=VARCHAR},
+		teacher = #{teacher,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		number =
+		#{number,jdbcType=INTEGER},
+		startTime = #{startTime,jdbcType=VARCHAR},
+		endTime = #{endTime,jdbcType=VARCHAR},
+		gmtCreate =
+		#{gmtCreate,jdbcType=VARCHAR},
+		gmtModify =
+		#{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT},
+		content =
+		#{content,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.Train">
+		update train
+		set
+		companyid = #{companyId,jdbcType=INTEGER},
+		title =
+		#{title,jdbcType=VARCHAR},
+		teacher = #{teacher,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		number =
+		#{number,jdbcType=INTEGER},
+		startTime = #{startTime,jdbcType=VARCHAR},
+		endTime = #{endTime,jdbcType=VARCHAR},
+		gmtCreate =
+		#{gmtCreate,jdbcType=VARCHAR},
+		gmtModify =
+		#{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByCompanyId" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from train
+		where companyid = #{id,jdbcType=INTEGER}
+	</select>
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.UserJobAstMapper">
+	<!-- 公司 岗位 用户 关联 -->
+	<resultMap id="UserJobAscResultMap" type="com.shixi.entity.vo.UserJobVO">
+		<result column="vId" property="id" />
+		<result column="jCompanyId" property="companyId" />
+		<result column="vSuccess" property="success" />
+		<result column="vGmtCreate" property="gmtCreate" />
+		<result column="vGmtModify" property="gmtModify" />
+		<result column="vDr" property="dr" />
+		<association property="user" javaType="com.shixi.entity.User">
+			<id column="id" property="id" />
+			<result column="vId" property="id" />
+			<result column="uUsername" property="username" />
+			<result column="uRealname" property="realname" />
+		</association>
+		<association property="job" javaType="com.shixi.entity.Job">
+			<id column="id" property="job_id" />
+			<result column="jId" property="id" />
+			<result column="jName" property="name" />
+		</association>
+	</resultMap>
+
+	<!-- 岗位sql -->
+	<!-- 统一取别名，避免名字冲突，导致获取不到值 -->
+	<sql id="jobSql">
+		j.id as jId,j.name as jName,j.major as jMajor,j.num as
+		jNum,j.address as jAddress,j.degree as jDegree,
+		j.money as
+		jMoney,j.jobDescribe,j.gmtCreate as jGmtCreate,j.gmtModify as
+		jGmtModify,j.dr as jDr
+	</sql>
+
+	<sql id="userjobSql">
+		v.id as vId,v.success as vSuccess,v.gmtCreate as
+		vGmtCreate,v.gmtModify as vGmtModify,
+		v.dr as vDr
+	</sql>
+
+	<sql id="userSql">
+		u.id as uId,u.username as uUsername,u.password as
+		uPassword,
+		u.realname as uRealname,u.userType as uUserType,u.sex as
+		uSex,
+		u.birthday as uBirthday,u.phoneNumber as uPhoneNumber,
+		u.email as
+		uEmail,u.gmtCreate as uGmtCreate,u.gmtModify as uGmtModify,
+		u.dr as uDr
+	</sql>
+
+	<!-- 某个公司的所有申请实习的用户 -->
+	<select id="findAscUserJobs" parameterType="Map" resultMap="UserJobAscResultMap">
+		select
+		<include refid="userSql" />
+		,
+		<include refid="jobSql" />
+		,
+		<include refid="userjobSql" />
+		from userjob v inner join job j on v.job_id = j.id inner
+		join user u
+		on
+		v.id = u.id
+		where v.job_id in (select id from job
+		<where>
+			<if test="companyId!=null">
+				and company_id=#{companyId}
+			</if>
+		</where>
+		)
+		<if test="userId!=null">
+			and v.id = #{userId}
+		</if>
+		<if test="jobname!=null">
+			and j.name like #{jobname}
+		</if>
+		<if test="realname!=null">
+			and u.realname like #{realname}
+		</if>
+		<if test="sort!=null and sort!='' and order!=null and order!=''">
+			order by ${sort} ${order}
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<!-- 某个公司的所有申请实习的用户数量 -->
+	<select id="getTotlaAscUserJobs" parameterType="Map" resultType="Long">
+		select count(*)
+		from userjob v inner join job j on v.job_id = j.id
+		inner
+		join user u
+		on v.id = u.id
+		where v.job_id in (select id from job
+		<where>
+			<if test="companyId!=null">
+				and company_id=#{companyId}
+			</if>
+		</where>
+		)
+		<if test="userId!=null">
+			and v.id = #{userId}
+		</if>
+		<if test="jobname!=null">
+			and j.name like #{jobname}
+		</if>
+		<if test="realname!=null">
+			and u.realname like #{realname}
+		</if>
+	</select>
+</mapper>

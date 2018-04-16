@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.RecruitMapper">
+	<resultMap id="BaseResultMap" type="com.shixi.entity.Recruit">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="company_id" jdbcType="INTEGER" property="companyId" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="startTime" jdbcType="VARCHAR" property="startTime" />
+		<result column="endTime" jdbcType="VARCHAR" property="endTime" />
+		<result column="contractUser" jdbcType="VARCHAR" property="contractUser" />
+		<result column="contractNumber" jdbcType="INTEGER" property="contractNumber" />
+		<result column="contractEmail" jdbcType="VARCHAR" property="contractEmail" />
+		<result column="contractAddress" jdbcType="VARCHAR" property="contractAddress" />
+		<result column="sendResumeUrl" jdbcType="VARCHAR" property="sendResumeUrl" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="lapse" jdbcType="BIT" property="lapse" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.shixi.entity.Recruit">
+		<result column="motoley" jdbcType="LONGVARCHAR" property="motoley" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, company_id, address, startTime, endTime, contractUser,
+		contractNumber, contractEmail,
+		contractAddress,sendResumeUrl,
+		gmtCreate, gmtModify, dr,lapse
+	</sql>
+	<sql id="Blob_Column_List">
+		motoley
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from recruit
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectByCompanyId" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from recruit
+		where company_id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		recruit
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.shixi.entity.Recruit">
+		insert into recruit (id,
+		company_id, address,
+		startTime, endTime, contractUser,
+		contractNumber,
+		contractEmail, contractAddress,sendResumeUrl,
+		gmtCreate, gmtModify,
+		dr,lapse,
+		motoley)
+		values
+		(#{id,jdbcType=INTEGER},
+		#{companyId,jdbcType=INTEGER},
+		#{address,jdbcType=VARCHAR},
+		#{startTime,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{contractUser,jdbcType=VARCHAR},
+		#{contractNumber,jdbcType=INTEGER},
+		#{contractEmail,jdbcType=VARCHAR},
+		#{contractAddress,jdbcType=VARCHAR},#{sendResumeUrl,jdbcType=VARCHAR},
+		#{gmtCreate,jdbcType=VARCHAR},
+		#{gmtModify,jdbcType=VARCHAR},
+		#{dr,jdbcType=BIT},
+		#{lapse,jdbcType=BIT},
+		#{motoley,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.shixi.entity.Recruit">
+		insert into recruit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="startTime != null">
+				startTime,
+			</if>
+			<if test="endTime != null">
+				endTime,
+			</if>
+			<if test="contractUser != null">
+				contractUser,
+			</if>
+			<if test="contractNumber != null">
+				contractNumber,
+			</if>
+			<if test="contractEmail != null">
+				contractEmail,
+			</if>
+			<if test="contractAddress != null">
+				contractAddress,
+			</if>
+			<if test="sendResumeUrl != null">
+				sendResumeUrl,
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate,
+			</if>
+			<if test="gmtModify != null">
+				gmtModify,
+			</if>
+			<if test="dr != null">
+				dr,
+			</if>
+			<if test="lapse != null">
+				lapse,
+			</if>
+			<if test="motoley != null">
+				motoley,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="Address != null">
+				#{Address,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="contractUser != null">
+				#{contractUser,jdbcType=VARCHAR},
+			</if>
+			<if test="contractNumber != null">
+				#{contractNumber,jdbcType=INTEGER},
+			</if>
+			<if test="contractEmail != null">
+				#{contractEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="contractAddress != null">
+				#{contractAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="sendResumeUrl != null">
+				#{sendResumeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				#{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=BIT},
+			</if>
+			<if test="lapse != null">
+				#{lapse,jdbcType=BIT},
+			</if>
+			<if test="motoley != null">
+				#{motoley,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.Recruit">
+		update recruit
+		<set>
+			<if test="companyId != null">
+				company_id = #{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				startTime = #{startTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				endTime = #{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="contractUser != null">
+				contractUser = #{contractUser,jdbcType=VARCHAR},
+			</if>
+			<if test="contractNumber != null">
+				contractNumber = #{contractNumber,jdbcType=INTEGER},
+			</if>
+			<if test="contractEmail != null">
+				contractEmail = #{contractEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="contractAddress != null">
+				contractAddress = #{contractAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="sendResumeUrl != null">
+				sendResumeUrl = #{sendResumeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				gmtModify = #{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				dr = #{dr,jdbcType=BIT},
+			</if>
+			<if test="lapse != null">
+				lapse = #{lapse,jdbcType=BIT},
+			</if>
+			<if test="motoley != null">
+				motoley = #{motoley,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shixi.entity.Recruit">
+		update
+		recruit
+		set company_id = #{companyId,jdbcType=INTEGER},
+		address =
+		#{address,jdbcType=VARCHAR},
+		startTime = #{startTime,jdbcType=VARCHAR},
+		endTime = #{endTime,jdbcType=VARCHAR},
+		contractUser =
+		#{contractUser,jdbcType=VARCHAR},
+		contractNumber =
+		#{contractNumber,jdbcType=INTEGER},
+		contractEmail =
+		#{contractEmail,jdbcType=VARCHAR},
+		contractAddress =
+		#{contractAddress,jdbcType=VARCHAR},
+		sendResumeUrl =
+		#{sendResumeUrl,jdbcType=VARCHAR},
+		gmtCreate =
+		#{gmtCreate,jdbcType=VARCHAR},
+		gmtModify =
+		#{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT},
+		lapse =
+		#{lapse,jdbcType=BIT},
+		motoley =
+		#{motoley,jdbcType=LONGVARCHAR}
+		where id
+		= #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.Recruit">
+		update recruit
+		set
+		company_id = #{companyId,jdbcType=INTEGER},
+		address =
+		#{address,jdbcType=VARCHAR},
+		startTime = #{startTime,jdbcType=VARCHAR},
+		endTime = #{endTime,jdbcType=VARCHAR},
+		contractUser =
+		#{contractUser,jdbcType=VARCHAR},
+		contractNumber =
+		#{contractNumber,jdbcType=INTEGER},
+		contractEmail =
+		#{contractEmail,jdbcType=VARCHAR},
+		contractAddress =
+		#{contractAddress,jdbcType=VARCHAR},
+		sendResumeUrl =
+		#{sendResumeUrl,jdbcType=VARCHAR},
+		gmtCreate =
+		#{gmtCreate,jdbcType=VARCHAR},
+		gmtModify =
+		#{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT}
+		lapse =
+		#{lapse,jdbcType=BIT},
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.CompanyAstMapper">
+	<resultMap id="CompanyResultMap" type="com.shixi.entity.vo.CompanyVO">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="world" jdbcType="VARCHAR" property="world" />
+		<result column="scale" jdbcType="VARCHAR" property="scale" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+		<result column="about" jdbcType="LONGVARCHAR" property="about" />
+	</resultMap>
+	<!-- 公司 岗位 一对多 -->
+	<resultMap id="CompanyJobsResultMap" type="com.shixi.entity.vo.CompanyVO"
+		extends="CompanyResultMap">
+		<collection property="jobs" ofType="com.shixi.entity.Job">
+			<id column="companyid" property="id" />
+			<result column="jId" jdbcType="INTEGER" property="id" />
+			<result column="jName" jdbcType="VARCHAR" property="name" />
+			<result column="jMajor" jdbcType="VARCHAR" property="major" />
+			<result column="jNum" jdbcType="INTEGER" property="num" />
+			<result column="jAddress" jdbcType="VARCHAR" property="address" />
+			<result column="jDegree" jdbcType="VARCHAR" property="degree" />
+			<result column="jMoney" jdbcType="VARCHAR" property="money" />
+			<result column="jGmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+			<result column="jGmtModify" jdbcType="VARCHAR" property="gmtModify" />
+			<result column="jDr" jdbcType="BIT" property="dr" />
+			<result column="jobDescribe" jdbcType="LONGVARCHAR" property="jobDescribe" />
+		</collection>
+	</resultMap>
+	<!-- 公司 招聘信息 一对一 -->
+	<resultMap extends="CompanyResultMap" id="CompanyRecruitResultMap"
+		type="com.shixi.entity.vo.CompanyVO">
+		<association property="recruit" javaType="com.shixi.entity.Recruit">
+			<id column="company_id" property="id" />
+			<result column="rId" property="id" />
+			<result column="rAddress" property="address" />
+			<result column="rMotoley" property="motoley" />
+			<result column="rStartTime" property="startTime" />
+			<result column="rEndTime" property="endTime" />
+			<result column="contractUser" property="contractUser" />
+			<result column="contractNumber" property="contractNumber" />
+			<result column="contractEmail" property="contractEmail" />
+			<result column="contractAddress" property="contractAddress" />
+			<result column="sendResumeUrl" property="sendResumeUrl" />
+			<result column="rGmtCreate" property="gmtCreate" />
+			<result column="rGmtModify" property="gmtModify" />
+			<result column="rDr" property="dr" />
+			<result column="rLapse" property="lapse" />
+		</association>
+	</resultMap>
+
+	<!-- 公司 招聘信息 岗位 -->
+	<resultMap extends="CompanyJobsResultMap" id="CompanyRecruitJobResultMap"
+		type="com.shixi.entity.vo.CompanyVO">
+		<association property="recruit" javaType="com.shixi.entity.Recruit">
+			<id column="companyid" property="id" />
+			<result column="rId" property="id" />
+			<result column="rAddress" property="address" />
+			<result column="rMotoley" property="motoley" />
+			<result column="rStartTime" property="startTime" />
+			<result column="rEndTime" property="endTime" />
+			<result column="contractUser" property="contractUser" />
+			<result column="contractNumber" property="contractNumber" />
+			<result column="contractEmail" property="contractEmail" />
+			<result column="contractAddress" property="contractAddress" />
+			<result column="sendResumeUrl" property="sendResumeUrl" />
+			<result column="rGmtCreate" property="gmtCreate" />
+			<result column="rGmtModify" property="gmtModify" />
+			<result column="rDr" property="dr" />
+			<result column="rLapse" property="lapse" />
+		</association>
+	</resultMap>
+
+	<!-- 公司 岗位 用户 关联 -->
+	<resultMap extends="CompanyJobsResultMap" id="CompanyAscUsersResultMap"
+		type="com.shixi.entity.vo.CompanyVO">
+		<collection property="userJobVOs" ofType="com.shixi.entity.vo.UserJobVO">
+			<id column="companyId" property="id" />
+			<result column="vId" property="id" />
+			<result column="jCompanyId" property="companyId" />
+			<result column="vSuccess" property="success" />
+			<result column="vGmtCreate" property="gmtCreate" />
+			<result column="vGmtModify" property="gmtModify" />
+			<result column="vDr" property="dr" />
+			<association property="user" javaType="com.shixi.entity.User">
+				<id column="id" property="id" />
+				<result column="vId" property="id" />
+				<result column="uUsername" property="username" />
+			</association>
+			<association property="job" javaType="com.shixi.entity.Job">
+				<id column="id" property="job_id" />
+				<result column="jId" property="id" />
+				<result column="jName" property="name" />
+			</association>
+		</collection>
+	</resultMap>
+
+	<!-- 公司sql -->
+	<sql id="companySql">
+		c.id, c.name, c.world, c.scale, c.address,
+		c.gmtCreate,
+		c.gmtModify, c.dr,c.about
+	</sql>
+
+	<!-- 岗位sql -->
+	<!-- 统一取别名，避免名字冲突，导致获取不到值 -->
+	<sql id="jobSql">
+		j.id as jId,j.name as jName,j.major as jMajor,j.num as
+		jNum,j.address as jAddress,j.degree as jDegree,
+		j.money as
+		jMoney,j.jobDescribe,j.gmtCreate as jGmtCreate,j.gmtModify as
+		jGmtModify,j.dr as jDr
+	</sql>
+
+	<!-- 招聘信息sql -->
+	<sql id="recruitSql">
+		r.id as rId,r.address as rAddress,r.motoley as
+		rMotoley,r.startTime as rStartTime,r.endTime as rEndTime,
+		r.contractUser,r.contractNumber,r.contractEmail,r.contractAddress,r.sendResumeUrl,
+		r.gmtCreate as rGmtCreate,r.gmtModify as rGmtModify,r.dr as
+		rDr,r.lapse as rLapse
+	</sql>
+
+	<sql id="userSql">
+		u.id as uId,u.username as uUsername,u.password as
+		uPassword,
+		u.realname as uRealname,u.userType as uUserType,u.sex as
+		uSex,
+		u.birthday as uBirthday,u.phoneNumber as uPhoneNumber,
+		u.email as
+		uEmail,u.gmtCreate as uGmtCreate,u.gmtModify as uGmtModify,
+		u.dr as uDr
+	</sql>
+
+	<!-- 查询公司招聘信息 返回公司信息和该公司的招聘信息 过滤掉失效的招聘信息 -->
+	<select id="findCompanyRecruit" parameterType="Map"
+		resultMap="CompanyRecruitResultMap">
+		select
+		<include refid="companySql" />
+		,
+		<include refid="recruitSql" />
+		from company c inner join recruit r on c.id=r.companyid
+		<where>
+			<if test="id != null">
+				and c.id =#{id}
+			</if>
+
+			<if test="startTime != null">
+				and r.startTime <![CDATA[ >= ]]>
+				#{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null">
+				and r.endTime <![CDATA[ <= ]]>
+				#{endTime,jdbcType=VARCHAR}
+			</if>
+			and (r.lapse is null||r.lapse =0)
+		</where>
+	</select>
+	<!-- 获取公司招聘信息数量 -->
+	<select id="getTotalCompanyRecruit" parameterType="Map"
+		resultType="Long">
+		select count(*)
+		from company c inner join recruit r on
+		c.id=r.company_id
+		<where>
+			<if test="id != null">
+				and c.id =#{id}
+			</if>
+
+			<if test="startTime != null">
+				and r.startTime <![CDATA[ >= ]]>
+				#{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null">
+				and r.endTime <![CDATA[ <= ]]>
+				#{endTime,jdbcType=VARCHAR}
+			</if>
+			and (r.lapse is null||r.lapse =0)
+		</where>
+	</select>
+
+	<!-- 查询某项岗位信息 返回的是这项岗位信息、招聘信息、公司信息 -->
+	<select id="findJobDetail" parameterType="Map"
+		resultMap="CompanyRecruitJobResultMap">
+		select
+		<include refid="companySql" />
+		,
+		<include refid="recruitSql" />
+		,
+		<include refid="jobSql" />
+		from (company c inner join recruit r on c.id=r.companyid ) inner join
+		job j on c.id=j.companyid
+		<where>
+			<if test="id != null">
+				and c.id =#{comapnyId}
+			</if>
+
+			<if test="jobId != null">
+				and j.id =#{jobId}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询公司信息、招聘信息、生效的岗位信息 -->
+	<select id="findCompanyRecruitJobs" parameterType="Map"
+		resultMap="CompanyRecruitJobResultMap">
+		select
+		<include refid="companySql" />
+		,
+		<include refid="recruitSql" />
+		,
+		<include refid="jobSql" />
+		from company c inner join recruit r on c.id=r.companyid
+		inner join job
+		j on c.id=j.companyid
+		<where>
+			<if test="id != null">
+				and c.id =#{id}
+			</if>
+			<if test="startTime != null">
+				and r.startTime <![CDATA[ >= ]]>
+				#{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null">
+				and r.endTime <![CDATA[ <= ]]>
+				#{endTime,jdbcType=VARCHAR}
+			</if>
+			and (j.lapse=0||j.lapse is null)
+		</where>
+	</select>
+	<!-- 用户申请某个岗位后，公司如果批准，就可以通过用户id查找公司的信息 -->
+	<select id="findCompanyInfoByUserId" parameterType="java.lang.Integer"
+		resultMap="CompanyResultMap">
+		select
+		<include refid="companySql" />
+		from userjob v inner join job j on v.jobid = j.id inner
+		join company c
+		on
+		j.companyid = c.id
+		where v.id=#{id} and v.success=1
+	</select>
+</mapper>

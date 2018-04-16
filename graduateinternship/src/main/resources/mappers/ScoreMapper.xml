@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.ScoreMapper">
+	<resultMap id="BaseResultMap" type="com.shixi.entity.Score">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="companyid" jdbcType="INTEGER" property="companyId" />
+		<result column="pid" jdbcType="INTEGER" property="pid" />
+		<result column="tscore" jdbcType="DOUBLE" property="tscore" />
+		<result column="cscore" jdbcType="DOUBLE" property="cscore" />
+		<result column="sum" jdbcType="DOUBLE" property="sum" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+		<result column="cComment" jdbcType="LONGVARCHAR" property="cComment" />
+		<result column="tComment" jdbcType="LONGVARCHAR" property="tComment" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, company_id, pid, tscore, cscore, (tscore+cscore)/2 as
+		sum, gmtCreate,
+		gmtModify, dr,cComment,tComment
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from score
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from score
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.shixi.entity.Score">
+		insert into score (id,
+		company_id, pid,
+		tscore, cscore, gmtCreate,
+		gmtModify,
+		dr,cComment,tComment)
+		values
+		(#{id,jdbcType=INTEGER},
+		#{companyId,jdbcType=INTEGER},
+		#{pid,jdbcType=INTEGER},
+		#{tscore,jdbcType=DOUBLE},
+		#{cscore,jdbcType=DOUBLE},
+		#{gmtCreate,jdbcType=VARCHAR},
+		#{gmtModify,jdbcType=VARCHAR},
+		#{dr,jdbcType=BIT},#{cComment,jdbcType=LONGVARCHAR},#{tComment,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.shixi.entity.Score">
+		insert into score
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="tscore != null">
+				tscore,
+			</if>
+			<if test="cscore != null">
+				cscore,
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate,
+			</if>
+			<if test="gmtModify != null">
+				gmtModify,
+			</if>
+			<if test="dr != null">
+				dr,
+			</if>
+			<if test="cComment != null">
+				cComment,
+			</if>
+			<if test="tComment != null">
+				tComment,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="tscore != null">
+				#{tscore,jdbcType=DOUBLE},
+			</if>
+			<if test="cscore != null">
+				#{cscore,jdbcType=DOUBLE},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				#{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=BIT},
+			</if>
+			<if test="cComment != null">
+				#{cComment,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="tComment != null">
+				#{tComment,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.Score">
+		update score
+		<set>
+
+			<if test="companyId != null">
+				company_id = #{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=INTEGER},
+			</if>
+			<if test="tscore != null">
+				tscore = #{tscore,jdbcType=DOUBLE},
+			</if>
+			<if test="cscore != null">
+				cscore = #{cscore,jdbcType=DOUBLE},
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				gmtModify = #{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				dr = #{dr,jdbcType=BIT},
+			</if>
+			<if test="cComment != null">
+				cComment = #{cComment,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="tComment != null">
+				tComment = #{tComment,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.Score">
+		update score
+		set
+		company_id = #{companyId,jdbcType=INTEGER},
+		pid =
+		#{pid,jdbcType=INTEGER},
+		tscore = #{tscore,jdbcType=DOUBLE},
+		cscore =
+		#{cscore,jdbcType=DOUBLE},
+		gmtCreate =
+		#{gmtCreate,jdbcType=VARCHAR},
+		gmtModify =
+		#{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT},
+		cComment = #{cComment,jdbcType=LONGVARCHAR},
+		tComment =
+		#{tComment,jdbcType=LONGVARCHAR}
+		where
+		id =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

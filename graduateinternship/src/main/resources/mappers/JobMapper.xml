@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.JobMapper">
+	<resultMap id="BaseResultMap" type="com.shixi.entity.Job">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="companyid" jdbcType="INTEGER" property="companyId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="major" jdbcType="VARCHAR" property="major" />
+		<result column="num" jdbcType="INTEGER" property="num" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="degree" jdbcType="VARCHAR" property="degree" />
+		<result column="money" jdbcType="VARCHAR" property="money" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+		<result column="lapse" jdbcType="BIT" property="lapse" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.shixi.entity.Job">
+		<result column="jobDescribe" jdbcType="LONGVARCHAR" property="jobDescribe" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, companyid, name, major, num, address, degree, money,
+		gmtCreate,
+		gmtModify, dr,lapse
+	</sql>
+	<sql id="Blob_Column_List">
+		jobDescribe
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from job
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from job
+		where id = #{id,jdbcType=INTEGER} and id not in(select job_id from
+		userjob)
+	</delete>
+	<insert id="insert" parameterType="com.shixi.entity.Job">
+		insert into job (id,
+		companyid, name,
+		major, num, address,
+		degree, money, gmtCreate,
+		gmtModify, dr, lapse,jobDescribe
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{companyId,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{major,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER},
+		#{address,jdbcType=VARCHAR},
+		#{degree,jdbcType=VARCHAR},
+		#{money,jdbcType=VARCHAR},
+		#{gmtCreate,jdbcType=VARCHAR},
+		#{gmtModify,jdbcType=VARCHAR},
+		#{dr,jdbcType=BIT},#{lapse,jdbcType=BIT},
+		#{jobDescribe,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.shixi.entity.Job">
+		insert into job
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="major != null">
+				major,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="degree != null">
+				degree,
+			</if>
+			<if test="money != null">
+				money,
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate,
+			</if>
+			<if test="gmtModify != null">
+				gmtModify,
+			</if>
+			<if test="dr != null">
+				dr,
+			</if>
+			<if test="lapse != null">
+				lapse,
+			</if>
+			<if test="jobDescribe != null">
+				jobDescribe,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="major != null">
+				#{major,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="degree != null">
+				#{degree,jdbcType=VARCHAR},
+			</if>
+			<if test="money != null">
+				#{money,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				#{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=BIT},
+			</if>
+			<if test="lapse != null">
+				#{lapse,jdbcType=BIT},
+			</if>
+			<if test="jobDescribe != null">
+				#{jobDescribe,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.Job">
+		update job
+		<set>
+			<if test="companyId != null">
+				companyid = #{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="major != null">
+				major = #{major,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="degree != null">
+				degree = #{degree,jdbcType=VARCHAR},
+			</if>
+			<if test="money != null">
+				money = #{money,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				gmtModify = #{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="jobDescribe != null">
+				jobDescribe = #{jobDescribe,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="lapse != null">
+				lapse = #{lapse,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shixi.entity.Job">
+		update
+		job
+		set companyid = #{companyId,jdbcType=INTEGER},
+		name =
+		#{name,jdbcType=VARCHAR},
+		major = #{major,jdbcType=VARCHAR},
+		num =
+		#{num,jdbcType=INTEGER},
+		address = #{address,jdbcType=VARCHAR},
+		degree =
+		#{degree,jdbcType=VARCHAR},
+		money = #{money,jdbcType=VARCHAR},
+		gmtModify = #{gmtModify,jdbcType=VARCHAR},
+		jobDescribe =
+		#{jobDescribe,jdbcType=LONGVARCHAR},
+		lapse =
+		#{lapse,jdbcType=BIT}
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.Job">
+		update job
+		set
+		companyid = #{companyId,jdbcType=INTEGER},
+		name =
+		#{name,jdbcType=VARCHAR},
+		major = #{major,jdbcType=VARCHAR},
+		num =
+		#{num,jdbcType=INTEGER},
+		address = #{address,jdbcType=VARCHAR},
+		degree =
+		#{degree,jdbcType=VARCHAR},
+		money = #{money,jdbcType=VARCHAR},
+		gmtModify = #{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT},
+		lapse = #{lapse,jdbcType=BIT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectJobsByName" parameterType="Map" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from job
+		<where>
+			<if test="name!=null and name!='' ">
+				and name like #{name}
+			</if>
+			<if test="companyId!=null and companyId!='' ">
+				and companyid = #{companyId}
+			</if>
+		</where>
+		<if test="sort!=null and sort!='' and order!=null and order!=''">
+			order by ${sort} ${order}
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<select id="getTotalJobsByName" parameterType="Map" resultType="Long">
+		select count(*)
+		from job
+		<where>
+			<if test="name!=null and name!='' ">
+				and name like #{name}
+			</if>
+			<if test="companyId!=null and companyId!='' ">
+				and companyid = #{companyId}
+			</if>
+		</where>
+	</select>
+</mapper>

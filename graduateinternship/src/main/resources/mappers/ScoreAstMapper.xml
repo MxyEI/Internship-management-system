@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.ScoreAstMapper">
+	<resultMap id="ScoreResultMap" type="com.shixi.entity.Score">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="sid" jdbcType="INTEGER" property="id" />
+		<result column="scompanyid" jdbcType="INTEGER" property="companyId" />
+		<result column="suid" jdbcType="INTEGER" property="uid" />
+		<result column="spid" jdbcType="INTEGER" property="pid" />
+		<result column="stscore" jdbcType="DOUBLE" property="tscore" />
+		<result column="scscore" jdbcType="DOUBLE" property="cscore" />
+		<result column="ssum" jdbcType="DOUBLE" property="sum" />
+		<result column="sgmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="sgmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="sdr" jdbcType="BIT" property="dr" />
+		<result column="scComment" jdbcType="LONGVARCHAR" property="cComment" />
+		<result column="stComment" jdbcType="LONGVARCHAR" property="tComment" />
+	</resultMap>
+	<resultMap id="userScore" type="com.shixi.entity.vo.ScoreVO"
+		extends="ScoreResultMap">
+		<association property="user" javaType="com.shixi.entity.User">
+			<id column="id" property="id" />
+			<result column="uid" jdbcType="INTEGER" property="id" />
+			<result column="uusername" jdbcType="VARCHAR" property="username" />
+			<result column="upassword" jdbcType="VARCHAR" property="password" />
+			<result column="urealname" jdbcType="VARCHAR" property="realname" />
+			<result column="uuserType" jdbcType="VARCHAR" property="usertype" />
+			<result column="usex" jdbcType="CHAR" property="sex" />
+			<result column="ubirthday" jdbcType="VARCHAR" property="birthday" />
+			<result column="uphoneNumber" jdbcType="INTEGER" property="phoneNumber" />
+			<result column="uemail" jdbcType="VARCHAR" property="email" />
+			<result column="ugmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+			<result column="ugmtModify" jdbcType="VARCHAR" property="gmtModify" />
+			<result column="udr" jdbcType="BIT" property="dr" />
+		</association>
+		<association property="puser" javaType="com.shixi.entity.User">
+			<id column="id" property="id" />
+			<result column="pid" jdbcType="INTEGER" property="id" />
+			<result column="pusername" jdbcType="VARCHAR" property="username" />
+			<result column="ppassword" jdbcType="VARCHAR" property="password" />
+			<result column="prealname" jdbcType="VARCHAR" property="realname" />
+			<result column="puserType" jdbcType="VARCHAR" property="usertype" />
+			<result column="psex" jdbcType="CHAR" property="sex" />
+			<result column="pbirthday" jdbcType="VARCHAR" property="birthday" />
+			<result column="pphoneNumber" jdbcType="INTEGER" property="phoneNumber" />
+			<result column="pemail" jdbcType="VARCHAR" property="email" />
+			<result column="pgmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+			<result column="pgmtModify" jdbcType="VARCHAR" property="gmtModify" />
+			<result column="pdr" jdbcType="BIT" property="dr" />
+		</association>
+	</resultMap>
+
+	<sql id="scoreSql">
+		s.id as sid, s.companyid as scompany_id,s.pid
+		as spid,
+		s.tscore as stscore,s.cscore as scscore, (s.tscore+s.cscore)/2 as
+		ssum,
+		s.gmtCreate as
+		sgmtCreate,
+		s.gmtModify as sgmtModify, s.dr as sdr ,
+		s.cComment as scComment , s.tComment as stComment
+	</sql>
+	<sql id="userSql">
+		u.id as uId,u.username as uUsername,u.password as
+		uPassword,
+		u.realname as uRealname,u.userType as uUserType,u.sex as
+		uSex,
+		u.birthday as uBirthday,u.phoneNumber as uPhoneNumber,
+		u.email as
+		uEmail,u.gmtCreate as uGmtCreate,u.gmtModify as uGmtModify,
+		u.dr as uDr
+	</sql>
+	<sql id="puserSql">
+		p.id as pId,p.psername as pUsername,p.password as
+		pPassword,
+		p.realname as pRealname,p.pserType as pUserType,p.sex as
+		pSex,
+		p.birthday as pBirthday,p.phoneNumber as pPhoneNumber,
+		p.email as
+		pEmail,p.gmtCreate as pGmtCreate,p.gmtModify as pGmtModify,
+		p.dr as pDr
+	</sql>
+	<sql id="jobSql">
+		j.id as jId,j.name as jName,j.major as jMajor,j.num as
+		jNum,j.address as jAddress,j.degree as jDegree,
+		j.money as
+		jMoney,j.jobDescribe,j.gmtCreate as jGmtCreate,j.gmtModify as
+		jGmtModify,j.dr as jDr
+	</sql>
+
+	<!-- 查询某个公司下用户评分信息 -->
+	<select id="findScoreOfUsers" parameterType="Map" resultMap="userScore">
+		select
+		<include refid="userSql" />
+		,
+		<include refid="scoreSql" />
+		from company c inner join job j on c.id=j.companyid inner join
+		userjob v on j.id=v.job_id inner join user u on v.id=u.id inner join
+		score s on s.id=u.id left join user p on p.id=s.pid
+		<where>
+			<if test="companyId!=null">
+				and c.id=#{companyId}
+			</if>
+			<if test="userId!=null">
+				and s.id=#{userId}
+			</if>
+			<if test="realname!=null">
+				and u.realname like #{realname}
+			</if>
+		</where>
+	</select>
+	<!-- 查询某个公司下用户数量 -->
+	<select id="getTotalScoreOfUsers" parameterType="Map"
+		resultType="Long">
+		select
+		count(*)
+		from company c inner join job j on c.id=j.companyid
+		inner join
+		userjob v on j.id=v.job_id inner join user u on v.id=u.id
+		left join
+		score s on s.id=u.id left join user p on p.id=s.pid
+		<where>
+			<if test="companyId!=null">
+				and c.id=#{companyId}
+			</if>
+			<if test="userId!=null">
+				and s.id=#{userId}
+			</if>
+			<if test="realname!=null">
+				and u.realname like #{realname}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询用户和评价信息 -->
+	<select id="getUserScoreInfo" parameterType="java.lang.Integer"
+		resultMap="userScore">
+		select
+		<include refid="scoreSql" />
+		,
+		<include refid="userSql" />
+		from score s inner join user u on s.id=u.id
+		where u.id =
+		#{id,jdbcType=INTEGER}
+	</select>
+</mapper>

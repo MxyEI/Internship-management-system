@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.UserJobMapper">
+	<resultMap id="BaseResultMap" type="com.shixi.entity.UserJob">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="jobid" jdbcType="INTEGER" property="jobId" />
+		<result column="success" jdbcType="BIT" property="success" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, jobid, success, gmtCreate, gmtModify, dr
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from userjob
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 审批成功的不能取消申请 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		userjob
+		where id = #{id,jdbcType=INTEGER} and (success=0||success is
+		null)
+	</delete>
+	<insert id="insert" parameterType="com.shixi.entity.UserJob">
+		insert into userjob (id,
+		jobid,
+		success, gmtCreate, gmtModify,
+		dr)
+		values
+		(#{id,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER},
+		#{success,jdbcType=BIT}, #{gmtCreate,jdbcType=VARCHAR},
+		#{gmtModify,jdbcType=VARCHAR},
+		#{dr,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.shixi.entity.UserJob">
+		insert into userjob
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="jobId != null">
+				jobid,
+			</if>
+
+			<if test="success != null">
+				success,
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate,
+			</if>
+			<if test="gmtModify != null">
+				gmtModify,
+			</if>
+			<if test="dr != null">
+				dr,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jobId != null">
+				#{jobId,jdbcType=INTEGER},
+			</if>
+
+			<if test="success != null">
+				#{success,jdbcType=BIT},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				#{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.UserJob">
+		update userjob
+		<set>
+			<if test="jobId != null">
+				jobid = #{jobId,jdbcType=INTEGER},
+			</if>
+
+			<if test="success != null">
+				success = #{success,jdbcType=BIT},
+			</if>
+			<if test="gmtCreate != null">
+				gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				gmtModify = #{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				dr = #{dr,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.UserJob">
+		update userjob
+		set
+		jobid = #{jobId,jdbcType=INTEGER},
+		success = #{success,jdbcType=BIT},
+		gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
+		gmtModify =
+		#{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>
