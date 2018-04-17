@@ -95,7 +95,7 @@
 		,
 		<include refid="scoreSql" />
 		from company c inner join job j on c.id=j.companyid inner join
-		userjob v on j.id=v.job_id inner join user u on v.id=u.id inner join
+		userjob v on j.id=v.jobid inner join user u on v.id=u.id inner join
 		score s on s.id=u.id left join user p on p.id=s.pid
 		<where>
 			<if test="companyId!=null">
@@ -116,7 +116,7 @@
 		count(*)
 		from company c inner join job j on c.id=j.companyid
 		inner join
-		userjob v on j.id=v.job_id inner join user u on v.id=u.id
+		userjob v on j.id=v.jobid inner join user u on v.id=u.id
 		left join
 		score s on s.id=u.id left join user p on p.id=s.pid
 		<where>

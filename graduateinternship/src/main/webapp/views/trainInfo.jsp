@@ -136,6 +136,7 @@
 	function saveTrain() {
 		var method;
 		var id = $("#id").val();
+		console.log("培训计划的id:"+id);
 		if (isNull(id)) {
 			method = "POST";
 		} else {

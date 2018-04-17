@@ -31,7 +31,7 @@ public class User implements Serializable{
 	private String realname;
 
 	/**
-	 * 用户类型
+	 * 用户类型,admin,company
 	 */
 	private String usertype;
 

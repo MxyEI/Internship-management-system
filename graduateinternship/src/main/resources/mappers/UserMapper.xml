@@ -61,7 +61,7 @@
 		#{dr,jdbcType=BIT}
 		)
 	</insert>
-	<insert id="insertSelective" parameterType="com.shixi.entity.User">
+	<insert id="insertSelective" parameterType="com.shixi.entity.User"  useGeneratedKeys="true"  keyProperty="id">
 		insert into user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">

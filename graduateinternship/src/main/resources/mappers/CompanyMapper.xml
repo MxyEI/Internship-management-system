@@ -32,7 +32,7 @@
     delete from company
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.shixi.entity.Company">
+  <insert id="insert" parameterType="com.shixi.entity.Company"  useGeneratedKeys="true"  keyProperty="id">
     insert into company (id, name, world, 
       scale, address, gmtCreate, 
       gmtModify, dr, about

@@ -111,6 +111,13 @@
 	}
 
 	function saveInfo() {
+        var method;
+        var id = $("#id").val();
+        if (isNull(id)) {
+            method = "POST";
+        } else {
+            method = "PATCH";
+        }
 		var data = {
 			"id" : getCookie("id"),
 			"name" : $("#name").val(),
@@ -120,7 +127,7 @@
 			"about" : about.html(),
 		};
 		$.ajax({
-			type : "PATCH",
+			type : method,
 			url : "${pageContext.request.contextPath}/companys",
 			data : data,
 			success : function(result) {

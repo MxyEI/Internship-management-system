@@ -91,7 +91,7 @@
 				<result column="uUsername" property="username" />
 			</association>
 			<association property="job" javaType="com.shixi.entity.Job">
-				<id column="id" property="job_id" />
+				<id column="id" property="jobid" />
 				<result column="jId" property="id" />
 				<result column="jName" property="name" />
 			</association>

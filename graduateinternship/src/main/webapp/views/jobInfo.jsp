@@ -28,10 +28,10 @@
 	<div id="tb">
 		<div>
 			<a onclick="openJobAddDialog()" class="easyui-linkbutton"
-				iconCls="icon-add" plain="true">添加</a> <a
-				onclick="openJobModifyDialog()" class="easyui-linkbutton"
-				iconCls="icon-edit" plain="true">修改</a> <a onclick="deleteJob()"
-				class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+				iconCls="icon-add" plain="true">添加</a>
+			<a onclick="openJobModifyDialog()" class="easyui-linkbutton"
+				iconCls="icon-edit" plain="true">修改</a>
+			<a onclick="deleteJob()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 		</div>
 		<div>
 			&nbsp;岗位名称：&nbsp;<input type="text" id="jobname" size="20"
@@ -200,7 +200,7 @@
 				});
 			}
 		});
-		jobDescribe = KingEditor.create('textarea[id="jobDescribe"]', {
+		jobDescribe = KindEditor.create('textarea[id="jobDescribe"]', {
 			items : [ 'cut', 'copy', 'paste', 'justifyleft', 'justifycenter',
 					'justifyright', 'justifyfull', 'insertorderedlist',
 					'insertunorderedlist', 'indent', 'outdent', 'subscript',

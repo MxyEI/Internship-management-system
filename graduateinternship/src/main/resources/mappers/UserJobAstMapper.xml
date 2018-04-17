@@ -16,7 +16,7 @@
 			<result column="uRealname" property="realname" />
 		</association>
 		<association property="job" javaType="com.shixi.entity.Job">
-			<id column="id" property="job_id" />
+			<id column="id" property="jobid" />
 			<result column="jId" property="id" />
 			<result column="jName" property="name" />
 		</association>
@@ -61,7 +61,7 @@
 		join user u
 		on
 		v.id = u.id
-		where v.job_id in (select id from job
+		where v.jobid in (select id from job
 		<where>
 			<if test="companyId!=null">
 				and companyid=#{companyId}
@@ -95,7 +95,7 @@
 		where v.jobid in (select id from job
 		<where>
 			<if test="companyId!=null">
-				and company_id=#{companyId}
+				and companyid=#{companyId}
 			</if>
 		</where>
 		)

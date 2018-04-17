@@ -50,7 +50,7 @@
 								<h1 class="dm-text" style="font-weight: normal;"
 									id="company_name"></h1>
 								<p class="dm-text" id="recruit_startTime"></p>
-								<p class="dm-text">所在学校：江西财经大学</p>
+								<p class="dm-text">所在学校：石河子大学</p>
 								<p class="dm-text" id="recruit_address"></p>
 							</div>
 						</div>

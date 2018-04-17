@@ -38,7 +38,7 @@
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from job
-		where id = #{id,jdbcType=INTEGER} and id not in(select job_id from
+		where id = #{id,jdbcType=INTEGER} and id not in(select jobid from
 		userjob)
 	</delete>
 	<insert id="insert" parameterType="com.shixi.entity.Job">

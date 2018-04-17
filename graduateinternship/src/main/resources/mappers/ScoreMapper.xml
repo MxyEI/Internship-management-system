@@ -15,7 +15,7 @@
 		<result column="tComment" jdbcType="LONGVARCHAR" property="tComment" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, company_id, pid, tscore, cscore, (tscore+cscore)/2 as
+		id, companyid, pid, tscore, cscore, (tscore+cscore)/2 as
 		sum, gmtCreate,
 		gmtModify, dr,cComment,tComment
 	</sql>
@@ -32,7 +32,7 @@
 	</delete>
 	<insert id="insert" parameterType="com.shixi.entity.Score">
 		insert into score (id,
-		company_id, pid,
+		companyid, pid,
 		tscore, cscore, gmtCreate,
 		gmtModify,
 		dr,cComment,tComment)
@@ -53,7 +53,7 @@
 				id,
 			</if>
 			<if test="companyId != null">
-				company_id,
+				companyid,
 			</if>
 			<if test="pid != null">
 				pid,
@@ -118,7 +118,7 @@
 		<set>
 
 			<if test="companyId != null">
-				company_id = #{companyId,jdbcType=INTEGER},
+				companyid = #{companyId,jdbcType=INTEGER},
 			</if>
 			<if test="pid != null">
 				pid = #{pid,jdbcType=INTEGER},
@@ -150,7 +150,7 @@
 	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.Score">
 		update score
 		set
-		company_id = #{companyId,jdbcType=INTEGER},
+		companyid = #{companyId,jdbcType=INTEGER},
 		pid =
 		#{pid,jdbcType=INTEGER},
 		tscore = #{tscore,jdbcType=DOUBLE},
