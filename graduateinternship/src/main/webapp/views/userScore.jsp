@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>评价</title>
+<title>实习评价</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
 <script type="text/javascript"
@@ -95,7 +95,7 @@
 					$('#tscore').val(result.data.tscore);
 					$('#cscore').val(result.data.cscore);
 					$('#sum').val(result.data.sum);
-					//无语了，为啥又变成ccomment,在公司页面是CC，在后端是cC
+
 					cComment.html(result.data.ccomment);
 					tComment.html(result.data.tcomment);
 					cComment.edit

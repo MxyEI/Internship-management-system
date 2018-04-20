@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixi.dao.ResumeMapper">
+	<resultMap id="BaseResultMap" type="com.shixi.entity.Resume">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="realname" jdbcType="VARCHAR" property="realname" />
+		<result column="major" jdbcType="VARCHAR" property="major" />
+		<result column="skill" jdbcType="VARCHAR" property="skill" />
+		<result column="course" jdbcType="VARCHAR" property="course" />
+		<result column="project" jdbcType="CHAR" property="project" />
+		<result column="hobbies" jdbcType="VARCHAR" property="hobbies" />
+		<result column="studentid" jdbcType="INTEGER" property="studentid" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, realname, major, skill, course, project, hobbies,
+		studentid,gmtCreate,
+		gmtModify, dr
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from resume
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from resume
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert" parameterType="com.shixi.entity.Resume">
+		insert into resume (id,
+		realname, major,
+		skill, course, project,
+		hobbies, studentid,
+		gmtCreate, gmtModify, dr
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{realname,jdbcType=VARCHAR},
+		#{major,jdbcType=VARCHAR},
+		#{skill,jdbcType=VARCHAR}, #{course,jdbcType=VARCHAR},
+		#{project,jdbcType=CHAR},
+		#{hobbies,jdbcType=VARCHAR},
+		#{studentid,jdbcType=INTEGER},
+		#{gmtCreate,jdbcType=VARCHAR}, #{gmtModify,jdbcType=VARCHAR},
+		#{dr,jdbcType=BIT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.shixi.entity.Resume"  useGeneratedKeys="true"  keyProperty="id">
+		insert into resume
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="realname != null">
+				realname,
+			</if>
+			<if test="major != null">
+				major,
+			</if>
+			<if test="skill != null">
+				skill,
+			</if>
+			<if test="course != null">
+				course,
+			</if>
+			<if test="project != null">
+				project,
+			</if>
+			<if test="hobbies != null">
+				hobbies,
+			</if>
+			<if test="studentid != null">
+				studentid,
+			</if>
+
+			<if test="gmtCreate != null">
+				gmtCreate,
+			</if>
+			<if test="gmtModify != null">
+				gmtModify,
+			</if>
+			<if test="dr != null">
+				dr,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="realname != null">
+				#{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="major != null">
+				#{major,jdbcType=VARCHAR},
+			</if>
+			<if test="skill != null">
+				#{skill,jdbcType=VARCHAR},
+			</if>
+			<if test="course != null">
+				#{course,jdbcType=VARCHAR},
+			</if>
+			<if test="project != null">
+				#{project,jdbcType=CHAR},
+			</if>
+			<if test="hobbies != null">
+				#{hobbies,jdbcType=VARCHAR},
+			</if>
+			<if test="studentid != null">
+				#{studentid,jdbcType=INTEGER},
+			</if>
+
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				#{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.Resume">
+		update resume
+		<set>
+			<if test="realname != null">
+				realname = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="major != null">
+				major = #{major,jdbcType=VARCHAR},
+			</if>
+			<if test="skill != null">
+				skill = #{skill,jdbcType=VARCHAR},
+			</if>
+			<if test="course != null">
+				course = #{course,usertype,jdbcType=VARCHAR},
+			</if>
+			<if test="project != null">
+				project = #{project,jdbcType=CHAR},
+			</if>
+			<if test="hobbies != null">
+				hobbies = #{hobbies,jdbcType=VARCHAR},
+			</if>
+			<if test="studentid != null">
+				studentid = #{studentid,jdbcType=INTEGER},
+			</if>
+
+			<if test="gmtCreate != null">
+				gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				gmtModify = #{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				dr = #{dr,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.shixi.entity.Resume">
+		update resume
+		set
+		realname = #{realname,jdbcType=VARCHAR},
+		major =
+		#{major,jdbcType=VARCHAR},
+		skill = #{skill,jdbcType=VARCHAR},
+		course = #{course,jdbcType=VARCHAR},
+		project = #{project,jdbcType=CHAR},
+		hobbies = #{hobbies,jdbcType=VARCHAR},
+		studentid =
+		#{studentid,jdbcType=INTEGER},
+		gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
+		gmtModify =
+		#{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectResumeByStudentID" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from resume
+		where studentid=#{studentid}
+	</select>
+
+
+</mapper>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>招聘信息</title>
+<title>实习单位招聘信息</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -51,12 +51,12 @@
 							data-options="required:true"></td>
 					</tr>
 					<tr>
-						<th>开始时间</th>
+						<th>宣讲会及招聘开始时间</th>
 						<td><input name="startTime" type="text" readonly="readonly"
 							id="startTime"></td>
 					</tr>
 					<tr>
-						<th>招聘截至时间</th>
+						<th>招聘截止时间</th>
 						<td><input name="endTime" type="text" readonly="readonly"
 							id="endTime"></td>
 					</tr>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>公司信息</title>
+<title>实习单位信息</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -42,7 +42,7 @@
 			<form id="companyForm">
 				<table class="table table-hover table-condensed">
 					<tr>
-						<th>公司名称</th>
+						<th>实习单位名称</th>
 						<td><input name="name" type="text" class="easyui-validatebox"
 							id="name" data-options="required:true"></td>
 					</tr>
@@ -66,8 +66,8 @@
 				简介
 				<textarea id="about" style="visibility: hidden;"></textarea>
 				<input type="button" name="button" value="保存" class="button" id="bc"
-					onclick="saveInfo();" style="margin: 10px"> <input
-					name="id" type="text" id="id" hidden>
+					onclick="saveInfo();" style="margin: 10px">
+				<input name="id" type="text" id="id" hidden>
 			</form>
 		</div>
 	</div>

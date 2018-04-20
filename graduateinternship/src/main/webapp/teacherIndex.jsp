@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>学生实习管理系统主页(教师)</title>
+<title>实习管理系统主页(实习管理部门)</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -21,7 +21,7 @@
 		<table width="100%">
 			<tr>
 				<td width="50%"
-					style="font-size: 30px; color: #8B8B8B; font-family: '楷体';">学生实习管理系统（教师）</td>
+					style="font-size: 30px; color: #8B8B8B; font-family: '楷体';">实习管理系统（实习管理部门）</td>
 				<td valign="bottom"
 					style="font-size: 20px; color: #8B8B8B; font-family: '楷体';"
 					align="right" width="50%"><font size="3">&nbsp;&nbsp;<strong>当前登录用户：</strong></font>
@@ -50,11 +50,14 @@
 			<div title="实习管理"
 				data-options="selected:true,iconCls:'icon-wenzhangs'"
 				style="padding: 10px; height: 10px;">
-				<a
-					href="javascript:openTab(' 评价','teacherScoreInfo.jsp','icon-wenzhang')"
+				<a href="javascript:openTab(' 实习评价','teacherScoreInfo.jsp','icon-wenzhang')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-wenzhang'"
-					style="width: 150px;"> 评价</a>
+					style="width: 150px;"> 实习评价</a>
+				<a href="javascript:openTab(' 实习鉴定标准','appraisalform.jsp','icon-wenzhang')"
+				   class="easyui-linkbutton"
+				   data-options="plain:true,iconCls:'icon-wenzhang'"
+				   style="width: 150px;"> 实习鉴定标准</a>
 			</div>
 			<div title="系统管理" data-options="iconCls:'icon-item'"
 				style="padding: 10px; border: none;">

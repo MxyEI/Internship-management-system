@@ -56,9 +56,9 @@
 					<td><select id="usertype" class="easyui-combobox"
 						style="width: 145px" data-options="editable:false"
 						panelHeight="auto">
-							<option value="student">学生</option>
-							<option value="company">公司</option>
-							<option value="teacher">教师</option>
+							<option value="student">实习毕业生</option>
+							<option value="company">实习单位</option>
+							<option value="teacher">实习管理部门</option>
 					</select></td>
 				</tr>
 			</table>

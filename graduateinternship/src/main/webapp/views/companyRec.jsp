@@ -36,7 +36,7 @@
 <script type="text/javascript">
 	$(function() {
 		//开始日期默认为当前日期
-		$('#startTime').val(getNowFormatDate());
+		//$('#startTime').val(getNowFormatDate());
 		dataGrid = $('#dg').datagrid({
 			url : '${pageContext.request.contextPath}/companys/datagrid',
 			method : 'GET',
@@ -116,6 +116,8 @@
 				});
 			}
 		});
+
+        searchJob();
 	});
 
 	function searchJob() {

@@ -126,7 +126,7 @@
 			"sex" : $("input[name='sex']:checked").val(),
 			"birthday" : $("#birthday").val(),
 			"phoneNumber" : $('#phoneNumber').val(),
-			"email" : $('#email').val(),
+			"email" : $('#email').val()
 		};
 		$.ajax({
 			type : "PATCH",

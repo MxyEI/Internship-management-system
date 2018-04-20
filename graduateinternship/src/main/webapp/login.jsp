@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>学生实习管理系统 - 登录</title>
+<title>实习管理系统 - 登录</title>
 <meta name="keywords" content="perfect-ssm">
 <meta name="description" content="perfect-ssm">
 <link
@@ -31,7 +31,7 @@
 			<div>
 				<h1 class="logo-name">PMS</h1>
 			</div>
-			<h3>欢迎使用 学生实习管理系统</h3>
+			<h3>欢迎使用 实习管理系统</h3>
 
 			<form class="m-t" role="form" id="userlogin" method="post"
 				name="userlogin" onsubmit="return false" action="##">
