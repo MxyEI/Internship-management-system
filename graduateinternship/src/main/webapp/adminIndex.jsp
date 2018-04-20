@@ -19,7 +19,7 @@
 		<table width="100%">
 			<tr>
 				<td width="50%"
-					style="font-size: 30px; color: #8B8B8B; font-family: '楷体';">学生实习管理系统（管理员）</td>
+					style="font-size: 30px; color: #8B8B8B; font-family: '楷体';">实习管理系统（管理员）</td>
 				<td valign="bottom"
 					style="font-size: 20px; color: #8B8B8B; font-family: '楷体';"
 					align="right" width="50%"><font size="3">&nbsp;&nbsp;<strong>当前登录用户：</strong></font>
