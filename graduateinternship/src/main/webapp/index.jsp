@@ -72,6 +72,10 @@
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-wenzhang'"
 					style="width: 150px;"> 实习评价</a>
+				<a href="javascript:openTab(' 实习评价','assess.jsp','icon-wenzhang')"
+				   class="easyui-linkbutton"
+				   data-options="plain:true,iconCls:'icon-wenzhang'"
+				   style="width: 150px;"> 实习评价表</a>
 				<a href="javascript:openTab(' 实习鉴定标准','appraisalform.jsp','icon-wenzhang')"
 				   class="easyui-linkbutton"
 				   data-options="plain:true,iconCls:'icon-wenzhang'"

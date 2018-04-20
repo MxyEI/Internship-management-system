@@ -61,8 +61,18 @@ public class UserJobServiceImpl implements IUserJobService {
 	}
 
 	@Override
+	public List<UserJobVO> findAscUserJobsWithSuccess(Map<String, Object> map) {
+		return userJobAstMapper.findAscUserJobsWithSuccess(map);
+	}
+
+	@Override
 	public Long getTotlaAscUserJobs(Map<String, Object> map) {
 		return userJobAstMapper.getTotlaAscUserJobs(map);
+	}
+
+	@Override
+	public Long getTotlaAscUserJobsWithSuccess(Map<String, Object> map) {
+		return userJobAstMapper.getTotlaAscUserJobsWithSuccess(map);
 	}
 
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>实习鉴定标准</title>
+    <title>实习评价表</title>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
     <script type="text/javascript"
@@ -40,11 +40,12 @@
 <div class="middle-box text-center loginscreen  animated fadeInDown"
      style="float: left; margin-left: 100px">
     <div>
-        <form id="appraisalform" method="post" style="">
+        <form id="assessinfo" method="post" style="">
             <input name="id" type="text" id="id" hidden>
+            <input name="userid" type="text" id="userid" hidden>
 
-            实习鉴定标准
-            <textarea id="content" style="visibility: hidden;"></textarea>
+            实习评价表
+            <textarea id="assesscontent" style="visibility: hidden;"></textarea>
             <input type="button" name="button" value="保存" class="button" id="bc"
                    onclick="saveInfo();" style="margin: 10px">
         </form>
@@ -52,10 +53,10 @@
 </div>
 </body>
 <script type="text/javascript">
-
+    var userId = getQueryStringByName("userid");
     $(function() {
         //实习鉴定表编辑器
-        content = KindEditor.create('textarea[id="content"]', {
+        assesscontent = KindEditor.create('textarea[id="assesscontent"]', {
             height:"800px",
             width:"400px",
             items : [ 'cut', 'copy', 'paste', 'justifyleft', 'justifycenter',
@@ -68,19 +69,33 @@
                 'removeformat', '|', 'table', 'hr', 'emoticons',
                 'pagebreak' ]
         });
-        setappraisalformInfo();
+        setassessInfo();
     });
 
-    //checkCookie();
-    setappraisalformInfo();
-    function setappraisalformInfo() {
+    checkCookie();
+    setassessInfo();
+    function setassessInfo() {
+        var urlstr;
+
+        var type= "student";
+        if(getCookie("usertype")!=type){
+            urlstr = "${pageContext.request.contextPath}/assess/assessbyuid/"+userId;
+        }else{
+            urlstr = "${pageContext.request.contextPath}/assess/"+getCookie("id");
+        }
         $.ajax({
             type : "GET",
-            url : "${pageContext.request.contextPath}/appraisalform/content",
+            url : urlstr,
             success : function(result) {
                 if (result.resultCode == 200) {
-                    $('#id').val(result.data.currentAppraisalForm.id);
-                    content.html(result.data.currentAppraisalForm.content);
+                    $('#id').val(result.data.currentAssess.id);
+                    assesscontent.html(result.data.currentAssess.assesscontent);
+                    if(getCookie("usertype")!=type){
+                        $('#userid').val(userId);
+                    }else{
+                        $('#userid').val(result.data.currentAssess.id);
+                    }
+
                 }
             },
             error : function() {
@@ -96,13 +111,15 @@
         } else {
             method = "PATCH";
         }
+
         var data = {
             "id": $('#id').val(),
-            "content" : content.html()
+            "assesscontent" : assesscontent.html(),
+            "userid": $('#userid').val()
         };
         $.ajax({
             type : method,
-            url : "${pageContext.request.contextPath}/appraisalform",
+            url : "${pageContext.request.contextPath}/assess",
             data : data,
             success : function(result) {
                 if (result.resultCode == 200) {

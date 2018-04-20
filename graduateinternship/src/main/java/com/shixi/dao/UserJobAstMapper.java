@@ -20,9 +20,23 @@ public interface UserJobAstMapper {
 	List<UserJobVO> findAscUserJobs(Map<String, Object> map);
 
 	/**
+	 * @Description: 某个公司的所有申请实习成功的用户信息
+	 * @author: hw
+	 * @date: 2018年4月1日 下午12:54:21
+	 */
+	List<UserJobVO> findAscUserJobsWithSuccess(Map<String, Object> map);
+
+	/**
 	 * @Description: 某个公司的所有申请实习的用户数量
 	 * @author: hw
 	 * @date: 2018年4月1日 下午12:54:40
 	 */
 	Long getTotlaAscUserJobs(Map<String, Object> map);
+
+	/**
+	 * @Description: 某个公司的所有申请实习成功的用户数量
+	 * @author: hw
+	 * @date: 2018年4月1日 下午12:54:40
+	 */
+	Long getTotlaAscUserJobsWithSuccess(Map<String, Object> map);
 }

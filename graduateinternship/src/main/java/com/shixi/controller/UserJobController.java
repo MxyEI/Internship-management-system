@@ -79,7 +79,7 @@ public class UserJobController {
 		if (userJob.getJob() != null && userJob.getJob().getName() != null) {
 			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));
 		}
-		log.info(userJob);
+		//log.info(userJob);
 		List<UserJobVO> list = userJobService.findAscUserJobs(map);
 		Long total = userJobService.getTotlaAscUserJobs(map);
 		JSONObject result = new JSONObject();
@@ -90,6 +90,60 @@ public class UserJobController {
 		ResponseUtil.write(response, result);
 		return null;
 	}
+
+
+	/**
+	 * @Description: 列出某个公司的申请成功的用户和申请岗位信息
+	 * @author: hw
+	 * @date: 2018年3月28日 下午1:46:21
+	 */
+	@RequestMapping(value = "/datagridwithsuccess", method = RequestMethod.GET)
+	public String listwithsuccess(@RequestParam(value = "page", required = false) String page,
+					   @RequestParam(value = "rows", required = false) String rows,
+					   @RequestParam(value = "sort", required = false) String sort,
+					   @RequestParam(value = "order", required = false) String order, UserJobVO userJob,
+					   HttpServletResponse response) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (page != null && rows != null) {
+			PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+			map.put("start", pageBean.getStart());
+			map.put("size", pageBean.getPageSize());
+		}
+		if (userJob.getCompanyId() != null) {
+			map.put("companyId", userJob.getCompanyId());
+		}
+		if (sort != null && order != null) {
+			map.put("order", order);
+			// 表格的字段名和数据库的字段名不一样，所以需要将sort转换成数据库中对应的字段名
+			if (sort.indexOf(".") < 0) {
+				sort = "v." + sort;
+			} else {
+				String pre = sort.substring(0, sort.indexOf("."));
+				String tableName = (pre.equals("user") ? "u" : pre.equals("job") ? "j" : "v");
+				sort = tableName + sort.substring(sort.indexOf("."));
+			}
+			map.put("sort", sort);
+		}
+		if (userJob.getUser() != null && userJob.getUser().getRealname() != null) {
+			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
+		}
+		if (userJob.getJob() != null && userJob.getJob().getName() != null) {
+			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));
+		}
+		//log.info(userJob);
+		List<UserJobVO> list = userJobService.findAscUserJobsWithSuccess(map);
+		Long total = userJobService.getTotlaAscUserJobsWithSuccess(map);
+		JSONObject result = new JSONObject();
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		result.put("rows", jsonArray);
+		result.put("total", total);
+		log.info("request: userjobs/list , map: " + map.toString());
+		ResponseUtil.write(response, result);
+		return null;
+	}
+
+
+
 
 	/**
 	 * @Description: 申请岗位
@@ -169,4 +223,6 @@ public class UserJobController {
 			return ResultGenerator.genFailResult("FAIL");
 		}
 	}
+
+
 }

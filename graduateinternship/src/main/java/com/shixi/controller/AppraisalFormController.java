@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description: 公司
+ * @Description: 实习鉴定标准
  * @author: hw
  * @date: 2018年3月21日 下午6:12:41
  */
@@ -25,7 +25,7 @@ public class AppraisalFormController {
 
     @Autowired
     private IAppraisalFormService iAppraisalFormService;
-    private static final Logger log = Logger.getLogger(CompanyController.class);
+    private static final Logger log = Logger.getLogger(AppraisalFormController.class);
 
     /**
      * @Description: 添加实习鉴定表

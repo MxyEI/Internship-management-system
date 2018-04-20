@@ -25,6 +25,10 @@ public interface IUserJobService {
 	int updateByPrimaryKey(UserJob record);
 
 	List<UserJobVO> findAscUserJobs(Map<String, Object> map);
+
+	List<UserJobVO> findAscUserJobsWithSuccess(Map<String, Object> map);
 	
 	Long getTotlaAscUserJobs(Map<String,Object> map);
+
+	Long getTotlaAscUserJobsWithSuccess(Map<String,Object> map);
 }

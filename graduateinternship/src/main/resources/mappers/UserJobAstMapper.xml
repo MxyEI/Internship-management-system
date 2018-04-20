@@ -109,4 +109,67 @@
 			and u.realname like #{realname}
 		</if>
 	</select>
+
+	<!-- 某个公司的所有申请实习成功的用户数量 -->
+	<select id="getTotlaAscUserJobsWithSuccess" parameterType="Map" resultType="Long">
+		select count(*)
+		from userjob v inner join job j on v.jobid = j.id
+		inner
+		join user u
+		on v.id = u.id
+		where v.jobid in (select id from job
+		<where>
+			<if test="companyId!=null">
+				and companyid=#{companyId}
+			</if>
+		</where>
+		) and v.success=1
+		<if test="userId!=null">
+			and v.id = #{userId}
+		</if>
+		<if test="jobname!=null">
+			and j.name like #{jobname}
+		</if>
+		<if test="realname!=null">
+			and u.realname like #{realname}
+		</if>
+	</select>
+
+	<!-- 某个公司的所有申请实习成功的用户 -->
+	<select id="findAscUserJobsWithSuccess" parameterType="Map" resultMap="UserJobAscResultMap">
+		select
+		<include refid="userSql" />
+		,
+		<include refid="jobSql" />
+		,
+		<include refid="userjobSql" />
+		from userjob v inner join job j on v.jobid = j.id inner
+		join user u
+		on
+		v.id = u.id
+		where v.jobid in (select id from job
+		<where>
+			<if test="companyId!=null">
+				and companyid=#{companyId}
+			</if>
+		</where>
+		) and v.success=1
+		<if test="userId!=null">
+			and v.id = #{userId}
+		</if>
+		<if test="jobname!=null">
+			and j.name like #{jobname}
+		</if>
+		<if test="realname!=null">
+			and u.realname like #{realname}
+		</if>
+		<if test="sort!=null and sort!='' and order!=null and order!=''">
+			order by ${sort} ${order}
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+
 </mapper>
