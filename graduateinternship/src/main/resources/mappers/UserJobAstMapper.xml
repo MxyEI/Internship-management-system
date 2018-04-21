@@ -143,17 +143,18 @@
 		<include refid="jobSql" />
 		,
 		<include refid="userjobSql" />
-		from userjob v inner join job j on v.jobid = j.id inner
-		join user u
-		on
-		v.id = u.id
+		com.name as comname
+		from userjob v
+		inner join job j on v.jobid = j.id
+		inner join user u on v.id = u.id
+		inner join company com on j.companyid= com.id
 		where v.jobid in (select id from job
 		<where>
 			<if test="companyId!=null">
 				and companyid=#{companyId}
 			</if>
 		</where>
-		) and v.success=1
+		) and com.name in(select name from company where id = #{companyId}) and v.success=1
 		<if test="userId!=null">
 			and v.id = #{userId}
 		</if>
