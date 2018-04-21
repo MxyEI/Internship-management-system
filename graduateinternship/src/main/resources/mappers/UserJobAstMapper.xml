@@ -135,7 +135,8 @@
 		</if>
 	</select>
 
-	<!-- 某个公司的所有申请实习成功的用户 -->
+	<!-- 某个公司的所有申请实习成功的用户
+	修改SQL：查询所有申请实习成功的用户的公司名字和岗位信息以作实习评价使用-->
 	<select id="findAscUserJobsWithSuccess" parameterType="Map" resultMap="UserJobAscResultMap">
 		select
 		<include refid="userSql" />
