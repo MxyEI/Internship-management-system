@@ -2,6 +2,7 @@ package com.shixi.entity.vo;
 
 import java.io.Serializable;
 
+import com.shixi.entity.Company;
 import com.shixi.entity.Job;
 import com.shixi.entity.User;
 
@@ -27,6 +28,8 @@ public class UserJobVO implements Serializable{
 	 * 申请岗位所在的公司
 	 */
 	private Integer companyId;
+
+	private Company company;
 
 	/**
 	 * 申请者

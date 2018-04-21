@@ -20,6 +20,11 @@
 			<result column="jId" property="id" />
 			<result column="jName" property="name" />
 		</association>
+		<association property="company" javaType="com.shixi.entity.Company">
+			<id column="id" property="id" />
+			<result column="comName" property="name" />
+		</association>
+
 	</resultMap>
 
 	<!-- 岗位sql -->
@@ -144,7 +149,7 @@
 		<include refid="jobSql" />
 		,
 		<include refid="userjobSql" />
-		com.name as comname
+		,com.name as comName
 		from userjob v
 		inner join job j on v.jobid = j.id
 		inner join user u on v.id = u.id

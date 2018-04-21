@@ -77,6 +77,11 @@
                 width : 150,
                 sortable : true
             }, {
+                field : 'company.name',
+                title : '实习单位名称',
+                width : 150,
+                sortable : true
+            }, {
                 field : 'job.name',
                 title : '岗位名称',
                 width : 150,
