@@ -84,7 +84,16 @@
 				field : 'success',
 				title : '申请状态',
 				width : 100,
-				sortable : true
+				sortable : true,
+                formatter : function(value, row, index) {
+
+                    if(value==true){
+                        return "通过"
+					}else{
+                        //console.log(row);
+                        return "不通过"
+					}
+                }
 			}, {
 				field : 'gmtModify',
 				title : '修改时间',
