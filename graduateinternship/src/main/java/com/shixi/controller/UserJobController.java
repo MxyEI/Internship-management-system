@@ -221,7 +221,7 @@ public class UserJobController {
 
 	/**
 	 * @Description: 获取用户申请的岗位
-	 * @param 用户角色关联表id:vId
+	 * @param 用户工作关联表id:vId
 	 * @author: hw
 	 * @date: 2018年3月28日 下午1:53:07
 	 */

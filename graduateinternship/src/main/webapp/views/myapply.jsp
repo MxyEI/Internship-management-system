@@ -123,7 +123,7 @@
 		});
 	});
 
-	//查看简历
+	//查看申请详情
     function seedetail(val,row) {
         return "<a href='${pageContext.request.contextPath}/views/jobDetail.jsp?jId="
             + row.job.id + "&vId="+row.id+"' target='_blank'>查看详情</a>";

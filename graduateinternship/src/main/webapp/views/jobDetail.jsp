@@ -85,6 +85,7 @@
 	var about_editor;
 	//岗位id
 	var jId = getQueryStringByName("jId");
+	//用户工作关联表的主键
     var vId = getQueryStringByName("vId");
 
 	$(function() {
@@ -196,7 +197,7 @@
 		url.append("${pageContext.request.contextPath}/userJobs");
 		if ($("#apply").text() != "申请") {
 			method = "DELETE";
-			url.append("/").append(getCookie("id"));
+			url.append("/").append(vId);
 		}
 		$.ajax({
 			type : method,
