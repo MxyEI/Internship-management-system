@@ -31,7 +31,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
-	<insert id="insert" parameterType="com.shixi.entity.Resume">
+	<insert id="insert" parameterType="com.shixi.entity.Resume"  useGeneratedKeys="true"  keyProperty="id">
 		insert into resume (id,
 		realname, major,
 		skill, course, project,
