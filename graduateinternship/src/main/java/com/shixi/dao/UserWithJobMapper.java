@@ -15,7 +15,7 @@ public interface UserWithJobMapper {
 
 	int insertSelective(UserWithJob record);
 
-	UserWithJob selectByPrimaryKey(Integer id);
+	UserWithJob selectByPrimaryKey(Integer userid);
 
 	int updateByPrimaryKeySelective(UserWithJob record);
 

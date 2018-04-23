@@ -19,6 +19,7 @@ public class UserJobVO implements Serializable{
 
 	private Integer id;
 
+	private Integer userId;
 	/**
 	 * 申请岗位信息
 	 */

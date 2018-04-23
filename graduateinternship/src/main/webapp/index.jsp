@@ -55,10 +55,14 @@
 				<a href="javascript:openTab(' 岗位信息','companyRec.jsp','icon-lxr')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
-					岗位信息</a> <a
-					href="javascript:openTab(' 我的申请','jobDetail.jsp','icon-lxr')"
-					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
+					岗位信息</a>
+				<%--<a href="javascript:openTab(' 我的申请','jobDetail.jsp','icon-lxr')"--%>
+					<%--class="easyui-linkbutton"--%>
+					<%--data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">--%>
+					<%--我的申请</a>--%>
+				<a href="javascript:openTab(' 我的申请','myapply.jsp','icon-lxr')"
+				   class="easyui-linkbutton"
+				   data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
 					我的申请</a>
 			</div>
 			<div title="实习管理"

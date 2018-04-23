@@ -116,7 +116,7 @@
 						setSuccess(result.data.data.success);
 						$("#apply").text("取消申请");
 					} else if (isNotNull(jId)) {
-						$("#apply").hide();
+						//$("#apply").hide();
 						$("#spzt").hide();
 					}
 				} else {
@@ -212,7 +212,7 @@
 						$("#apply").text("取消申请");
 					}
 				} else {
-					alert("申请已被公司批准，不能取消申请");
+					alert("申请已被实习单位批准，不能取消申请");
 				}
 			},
 			error : function() {

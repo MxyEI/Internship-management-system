@@ -132,8 +132,62 @@ public class UserJobController {
 			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));
 		}
 		//log.info(userJob);
-		List<UserJobVO> list = userJobService.findAscUserJobsWithSuccess(map);
+		List<UserJobVO> list = userJobService.findAscUserJobsByUserid(map);
 		Long total = userJobService.getTotlaAscUserJobsWithSuccess(map);
+		JSONObject result = new JSONObject();
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		result.put("rows", jsonArray);
+		result.put("total", total);
+		log.info("request: userjobs/list , map: " + map.toString());
+		ResponseUtil.write(response, result);
+		return null;
+	}
+
+
+
+
+	/**
+	 * @Description: 列出某个用户所有的申请信息
+	 * @author: hw
+	 * @date: 2018年4月28日 下午1:46:21
+	 */
+	@RequestMapping(value = "/datagridwithmyapply/{userid}", method = RequestMethod.GET)
+	public String listwithusersapply(@PathVariable(value = "userid") Integer userid,@RequestParam(value = "page", required = false) String page,
+								  @RequestParam(value = "rows", required = false) String rows,
+								  @RequestParam(value = "sort", required = false) String sort,
+								  @RequestParam(value = "order", required = false) String order, UserJobVO userJob,
+								  HttpServletResponse response) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (page != null && rows != null) {
+			PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+			map.put("start", pageBean.getStart());
+			map.put("size", pageBean.getPageSize());
+		}
+//		if (userJob.getUserId() != null) {
+//			map.put("userid", userid);
+//		}
+		map.put("userid", userid);
+		if (sort != null && order != null) {
+			map.put("order", order);
+			// 表格的字段名和数据库的字段名不一样，所以需要将sort转换成数据库中对应的字段名
+			if (sort.indexOf(".") < 0) {
+				sort = "v." + sort;
+			} else {
+				String pre = sort.substring(0, sort.indexOf("."));
+				String tableName = (pre.equals("user") ? "u" : pre.equals("job") ? "j" : "v");
+				sort = tableName + sort.substring(sort.indexOf("."));
+			}
+			map.put("sort", sort);
+		}
+		if (userJob.getUser() != null && userJob.getUser().getRealname() != null) {
+			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
+		}
+		if (userJob.getJob() != null && userJob.getJob().getName() != null) {
+			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));
+		}
+		//log.info(userJob);
+		List<UserJobVO> list = userJobService.findAscUserJobsWithUserid(map);
+		Long total = userJobService.getTotlaAscUserJobsWithuser(map);
 		JSONObject result = new JSONObject();
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		result.put("rows", jsonArray);
@@ -167,18 +221,18 @@ public class UserJobController {
 
 	/**
 	 * @Description: 获取用户申请的岗位
-	 * @param id:用户id
+	 * @param userid:用户id
 	 * @author: hw
 	 * @date: 2018年3月28日 下午1:53:07
 	 */
 	@RequestMapping(value = "/{userid}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result get(@PathVariable(value = "userid") Integer id) throws Exception {
-		if (id == null) {
+	public Result get(@PathVariable(value = "userid") Integer userid) throws Exception {
+		if (userid == null) {
 			return ResultGenerator.genFailResult("ERROR");
 		}
-		UserWithJob result = userJobService.selectByPrimaryKey(id);
-		log.info("request: userjob/get , userid " + id);
+		UserWithJob result = userJobService.selectByPrimaryKey(userid);
+		log.info("request: userjob/get , userid " + userid);
 		if (result != null) {
 			Map<String, UserWithJob> data = new HashMap<String, UserWithJob>();
 			data.put("data", result);

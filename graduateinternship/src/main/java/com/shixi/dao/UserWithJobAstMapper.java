@@ -39,4 +39,20 @@ public interface UserWithJobAstMapper {
 	 * @date: 2018年4月1日 下午12:54:40
 	 */
 	Long getTotlaAscUserJobsWithSuccess(Map<String, Object> map);
+
+	/**
+	 * @Description: 某个用户的所有申请信息
+	 * @author: hw
+	 * @date: 2018年4月21日 下午12:54:40
+	 */
+	List<UserJobVO> findAscUserJobsByUserid(Map<String, Object> map);
+
+
+	List<UserJobVO> findAscUserJobsWithUserid(Map<String,Object> map);
+	/**
+	 * @Description: 某个用户的所有申请信息数量
+	 * @author: hw
+	 * @date: 2018年4月21日 下午12:54:40
+	 */
+	Long getTotlaAscUserJobsWithuser(Map<String,Object> map);
 }

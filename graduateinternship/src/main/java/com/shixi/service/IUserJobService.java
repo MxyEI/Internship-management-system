@@ -19,7 +19,7 @@ public interface IUserJobService {
 
 	int insertSelective(UserWithJob record);
 
-	UserWithJob selectByPrimaryKey(Integer id);
+	UserWithJob selectByPrimaryKey(Integer userid);
 
 	int updateByPrimaryKeySelective(UserWithJob record);
 
@@ -32,4 +32,11 @@ public interface IUserJobService {
 	Long getTotlaAscUserJobs(Map<String,Object> map);
 
 	Long getTotlaAscUserJobsWithSuccess(Map<String,Object> map);
+
+	List<UserJobVO> findAscUserJobsByUserid(Map<String, Object> map);
+
+
+	List<UserJobVO> findAscUserJobsWithUserid(Map<String,Object> map);
+	Long getTotlaAscUserJobsWithuser(Map<String,Object> map);
+
 }

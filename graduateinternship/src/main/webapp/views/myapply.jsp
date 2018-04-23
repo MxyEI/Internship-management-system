@@ -34,7 +34,7 @@
 <script type="text/javascript">
 	$(function() {
 		dataGrid = $('#dg').datagrid({
-			url : '${pageContext.request.contextPath}/userJobs/datagrid',
+			url : '${pageContext.request.contextPath}/userJobs/datagridwithmyapply/'+getCookie("id"),
 			method : 'GET',
 			fit : false,
 			fitColumns : true,
@@ -43,7 +43,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'success',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -52,7 +52,7 @@
 			rownumbers : true,
 			singleSelect : true,
 			queryParams : {
-				companyId : getCookie("id")
+				userid : getCookie("id")
 			},
 			frozenColumns : [ [ {
 				field : 'dd',
@@ -100,19 +100,11 @@
 				width : 200,
 				sortable : true
 			}, {
-                field : 'status',
-                title : '简历信息',
-                width : 100,
-                formatter : function(value, row, index) {
-                    console.log(row);
-                    return seejianli(row.user.id);
-                }
-            }, {
 				field : 'action',
 				title : '操作',
 				width : 100,
 				formatter : function(value, row, index) {
-					return formatHref(value, row);
+					return seedetail(value, row);
 				}
 			} ] ],
 			onLoadSuccess : function() {
@@ -129,52 +121,11 @@
 			}
 		});
 	});
-	/* 申请状态 */
-	function resume(success) {
-		if (success) {
-			return "拒绝";
-		}
-		return "批准";
-	}
-
-	function sendResume(success, id,userid) {
-		$.ajax({
-			type : "PATCH",
-			url : "${pageContext.request.contextPath}/userJobs",
-			data : {
-				"id" : id,
-				"userid":userid,
-				"success" : !success
-			},
-			success : function(result) {
-				if (result.resultCode == 200) {
-					$("#dg").datagrid("reload");
-				} else {
-					$.messager.alert("系统提示", "操作失败");
-				}
-				;
-			},
-			error : function() {
-				$.messager.alert("系统提示", "操作失败");
-			}
-		});
-	}
-
-	function formatHref(val, row) {
-        //<a onclick='sendResume(row.success,row.id) class='easyui-linkbutton' iconCls='icon-ok'> resume(row.success)</a><a onclick='seejianli(row)'>查看简历</a>
-		var str = new StringBuffer();
-		str.append("<a onclick='sendResume(");
-		str.append(row.success).append(",").append(row.id).append(",").append(row.user.id);
-		str.append(")' class='easyui-linkbutton' iconCls='icon-ok'>");
-		str.append(resume(row.success));
-		str.append("</a> ");
-		return str.toString();
-	}
 
 	//查看简历
-    function seejianli(id) {
-        return "<a href='${pageContext.request.contextPath}/views/jianli.jsp?userid="
-            + id + "' target='_blank'>查看简历</a>";
+    function seedetail(val,row) {
+        return "<a href='${pageContext.request.contextPath}/views/jobDetail.jsp?jId="
+            + row.job.id + "' target='_blank'>查看详情</a>";
     }
 
 	function searchUserJob() {

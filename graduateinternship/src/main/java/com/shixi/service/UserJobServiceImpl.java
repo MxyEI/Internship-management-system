@@ -44,8 +44,8 @@ public class UserJobServiceImpl implements IUserJobService {
 	}
 
 	@Override
-	public UserWithJob selectByPrimaryKey(Integer id) {
-		return userJobMapper.selectByPrimaryKey(id);
+	public UserWithJob selectByPrimaryKey(Integer userid) {
+		return userJobMapper.selectByPrimaryKey(userid);
 	}
 
 	@Override
@@ -76,6 +76,21 @@ public class UserJobServiceImpl implements IUserJobService {
 	@Override
 	public Long getTotlaAscUserJobsWithSuccess(Map<String, Object> map) {
 		return userJobAstMapper.getTotlaAscUserJobsWithSuccess(map);
+	}
+
+    @Override
+    public List<UserJobVO> findAscUserJobsByUserid(Map<String, Object> map) {
+        return userJobAstMapper.findAscUserJobsByUserid(map);
+    }
+
+	@Override
+	public List<UserJobVO> findAscUserJobsWithUserid(Map<String,Object> map) {
+		return userJobAstMapper.findAscUserJobsWithUserid(map);
+	}
+
+	@Override
+	public Long getTotlaAscUserJobsWithuser(Map<String,Object> map) {
+		return userJobAstMapper.getTotlaAscUserJobsWithuser(map);
 	}
 
 }
