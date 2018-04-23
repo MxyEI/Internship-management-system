@@ -179,4 +179,42 @@
 	</select>
 
 
+	<!-- 某个毕业生的所有申请实习的信息-->
+	<select id="findAscUserJobsByUserid" parameterType="Map" resultMap="UserJobAscResultMap">
+		select
+		<include refid="userSql" />
+		,
+		<include refid="jobSql" />
+		,
+		<include refid="userjobSql" />
+		,com.name as comName
+		from userjob v
+		inner join job j on v.jobid = j.id
+		inner join user u on v.id = u.id
+		inner join company com on j.companyid= com.id
+		where v.id in (select id from user
+		<where>
+			<if test="id!=null">
+				and id=#{id}
+			</if>
+		</where>
+		) and com.name in(select name from company where id = #{companyId}) and v.success=1
+		<if test="userId!=null">
+			and v.id = #{userId}
+		</if>
+		<if test="jobname!=null">
+			and j.name like #{jobname}
+		</if>
+		<if test="realname!=null">
+			and u.realname like #{realname}
+		</if>
+		<if test="sort!=null and sort!='' and order!=null and order!=''">
+			order by ${sort} ${order}
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+
 </mapper>

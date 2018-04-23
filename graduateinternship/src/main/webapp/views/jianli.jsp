@@ -79,7 +79,7 @@
 </div>
 </body>
 <script type="text/javascript">
-
+    var userId = getQueryStringByName("userid");
     $(function() {
         //课程信息编辑器
         course = KindEditor.create('textarea[id="course"]', {
@@ -141,10 +141,17 @@
     setResumeInfo();
 
     function setResumeInfo() {
+        var urlstr;
+
+        var type= "student";
+        if(getCookie("usertype")!=type){
+            urlstr = "${pageContext.request.contextPath}/personresume/"+userId;
+        }else{
+            urlstr = "${pageContext.request.contextPath}/personresume/"+getCookie("id");
+        }
         $.ajax({
             type : "GET",
-            url : "${pageContext.request.contextPath}/personresume/"
-            + getCookie("id"),
+            url : urlstr,
             success : function(result) {
                 if (result.resultCode == 200) {
 

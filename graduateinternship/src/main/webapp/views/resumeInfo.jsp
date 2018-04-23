@@ -91,6 +91,13 @@
 				width : 200,
 				sortable : true
 			}, {
+                field : 'status',
+                title : '简历信息',
+                width : 100,
+                formatter : function(value, row, index) {
+                    return seejianli(row.id);
+                }
+            }, {
 				field : 'action',
 				title : '操作',
 				width : 100,
@@ -143,14 +150,21 @@
 	}
 
 	function formatHref(val, row) {
+        //<a onclick='sendResume(row.success,row.id) class='easyui-linkbutton' iconCls='icon-ok'> resume(row.success)</a><a onclick='seejianli(row)'>查看简历</a>
 		var str = new StringBuffer();
 		str.append("<a onclick='sendResume(");
 		str.append(row.success).append(",").append(row.id);
 		str.append(")' class='easyui-linkbutton' iconCls='icon-ok'>");
 		str.append(resume(row.success));
-		str.append("</a>");
+		str.append("</a> ");
 		return str.toString();
 	}
+
+	//查看简历
+    function seejianli(id) {
+        return "<a href='${pageContext.request.contextPath}/views/jianli.jsp?userid="
+            + id + "' target='_blank'>查看简历</a>";
+    }
 
 	function searchUserJob() {
 		$("#dg").datagrid('load', {
