@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.shixi.entity.UserWithJob;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -152,7 +153,7 @@ public class UserJobController {
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
-	public Result add(UserJob userJob) throws Exception {
+	public Result add(UserWithJob userJob) throws Exception {
 		int resultTotal = 0;
 		userJob.setGmtCreate(DateUtil.getCurrentDateStr());
 		resultTotal = userJobService.insert(userJob);
@@ -170,16 +171,16 @@ public class UserJobController {
 	 * @author: hw
 	 * @date: 2018年3月28日 下午1:53:07
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{userid}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result get(@PathVariable(value = "id") Integer id) throws Exception {
+	public Result get(@PathVariable(value = "userid") Integer id) throws Exception {
 		if (id == null) {
 			return ResultGenerator.genFailResult("ERROR");
 		}
-		UserJob result = userJobService.selectByPrimaryKey(id);
-		log.info("request: userjob/get , id " + id);
+		UserWithJob result = userJobService.selectByPrimaryKey(id);
+		log.info("request: userjob/get , userid " + id);
 		if (result != null) {
-			Map<String, UserJob> data = new HashMap<String, UserJob>();
+			Map<String, UserWithJob> data = new HashMap<String, UserWithJob>();
 			data.put("data", result);
 			return ResultGenerator.genSuccessResult(data);
 		} else {
@@ -213,7 +214,7 @@ public class UserJobController {
 	 */
 	@RequestMapping(value = "", method = RequestMethod.PATCH)
 	@ResponseBody
-	public Result update(UserJob userJob) throws Exception {
+	public Result update(UserWithJob userJob) throws Exception {
 		userJob.setGmtModify(DateUtil.getCurrentDateStr());
 		int resultTotal = userJobService.updateByPrimaryKeySelective(userJob);
 		log.info("request: userJob/update , userJob: " + userJob.toString());

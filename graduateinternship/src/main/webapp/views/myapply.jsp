@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>申请信息</title>
+<title>我的申请信息</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -71,16 +71,11 @@
                 hidden : true
             } ] ],
 			columns : [ [ {
-				field : 'user.username',
-				title : '用户名',
-				width : 150,
-				sortable : true
-			}, {
-				field : 'user.realname',
-				title : '真实姓名',
-				width : 150,
-				sortable : true
-			}, {
+                field : 'company.name',
+                title : '实习单位名称',
+                width : 150,
+                sortable : true
+            }, {
 				field : 'job.name',
 				title : '岗位名称',
 				width : 150,

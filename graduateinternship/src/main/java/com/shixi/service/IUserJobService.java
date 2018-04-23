@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shixi.entity.UserJob;
+import com.shixi.entity.UserWithJob;
 import com.shixi.entity.vo.UserJobVO;
 
 /**
@@ -14,15 +15,15 @@ import com.shixi.entity.vo.UserJobVO;
 public interface IUserJobService {
 	int deleteByPrimaryKey(Integer id);
 
-	int insert(UserJob record);
+	int insert(UserWithJob record);
 
-	int insertSelective(UserJob record);
+	int insertSelective(UserWithJob record);
 
-	UserJob selectByPrimaryKey(Integer id);
+	UserWithJob selectByPrimaryKey(Integer id);
 
-	int updateByPrimaryKeySelective(UserJob record);
+	int updateByPrimaryKeySelective(UserWithJob record);
 
-	int updateByPrimaryKey(UserJob record);
+	int updateByPrimaryKey(UserWithJob record);
 
 	List<UserJobVO> findAscUserJobs(Map<String, Object> map);
 

@@ -117,7 +117,7 @@
 
     function formatHref(val, row) {
         return "<a href='${pageContext.request.contextPath}/views/assess.jsp?userid="
-            + row.id + "' target='_blank'>评价</a>";
+            + row.user.id + "' target='_blank'>评价</a>";
     }
 
     function searchUserJob() {

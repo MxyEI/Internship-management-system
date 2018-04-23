@@ -62,10 +62,10 @@
 		<include refid="jobSql" />
 		,
 		<include refid="userjobSql" />
-		from userjob v inner join job j on v.jobid = j.id inner
+		from userwithjob v inner join job j on v.jobid = j.id inner
 		join user u
 		on
-		v.id = u.id
+		v.userid = u.id
 		where v.jobid in (select id from job
 		<where>
 			<if test="companyId!=null">
@@ -74,7 +74,7 @@
 		</where>
 		)
 		<if test="userId!=null">
-			and v.id = #{userId}
+			and v.userid = #{userId}
 		</if>
 		<if test="jobname!=null">
 			and j.name like #{jobname}
@@ -93,10 +93,10 @@
 	<!-- 某个公司的所有申请实习的用户数量 -->
 	<select id="getTotlaAscUserJobs" parameterType="Map" resultType="Long">
 		select count(*)
-		from userjob v inner join job j on v.jobid = j.id
+		from userwithjob v inner join job j on v.jobid = j.id
 		inner
 		join user u
-		on v.id = u.id
+		on v.userid = u.id
 		where v.jobid in (select id from job
 		<where>
 			<if test="companyId!=null">
@@ -105,7 +105,7 @@
 		</where>
 		)
 		<if test="userId!=null">
-			and v.id = #{userId}
+			and v.userid = #{userId}
 		</if>
 		<if test="jobname!=null">
 			and j.name like #{jobname}
@@ -118,10 +118,10 @@
 	<!-- 某个公司的所有申请实习成功的用户数量 -->
 	<select id="getTotlaAscUserJobsWithSuccess" parameterType="Map" resultType="Long">
 		select count(*)
-		from userjob v inner join job j on v.jobid = j.id
+		from userwithjob v inner join job j on v.jobid = j.id
 		inner
 		join user u
-		on v.id = u.id
+		on v.userid = u.id
 		where v.jobid in (select id from job
 		<where>
 			<if test="companyId!=null">
@@ -130,7 +130,7 @@
 		</where>
 		) and v.success=1
 		<if test="userId!=null">
-			and v.id = #{userId}
+			and v.userid = #{userId}
 		</if>
 		<if test="jobname!=null">
 			and j.name like #{jobname}
@@ -150,9 +150,9 @@
 		,
 		<include refid="userjobSql" />
 		,com.name as comName
-		from userjob v
+		from userwithjob v
 		inner join job j on v.jobid = j.id
-		inner join user u on v.id = u.id
+		inner join user u on v.userid = u.id
 		inner join company com on j.companyid= com.id
 		where v.jobid in (select id from job
 		<where>
@@ -162,7 +162,7 @@
 		</where>
 		) and com.name in(select name from company where id = #{companyId}) and v.success=1
 		<if test="userId!=null">
-			and v.id = #{userId}
+			and v.userid = #{userId}
 		</if>
 		<if test="jobname!=null">
 			and j.name like #{jobname}
@@ -188,11 +188,11 @@
 		,
 		<include refid="userjobSql" />
 		,com.name as comName
-		from userjob v
+		from userwithjob v
 		inner join job j on v.jobid = j.id
-		inner join user u on v.id = u.id
+		inner join user u on v.userid = u.id
 		inner join company com on j.companyid= com.id
-		where v.id in (select id from user
+		where v.userid in (select id from user
 		<where>
 			<if test="id!=null">
 				and id=#{id}
@@ -200,7 +200,7 @@
 		</where>
 		) and com.name in(select name from company where id = #{companyId}) and v.success=1
 		<if test="userId!=null">
-			and v.id = #{userId}
+			and v.userid = #{userId}
 		</if>
 		<if test="jobname!=null">
 			and j.name like #{jobname}

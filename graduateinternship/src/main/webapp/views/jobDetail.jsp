@@ -101,11 +101,12 @@
 	});
 	/* 检验是否已经申请该岗位 */
 	function checkIsSelected() {
+	    var userid = getCookie("id");
 		$.ajax({
 			type : "GET",
 			async : false,
 			url : "${pageContext.request.contextPath}/userJobs/"
-					+ getCookie("id"),
+					+ userid,
 			success : function(result) {
 				if (result.resultCode == 200 && result.data != null
 						&& result.data.data != null
@@ -200,7 +201,7 @@
 			type : method,
 			url : url,
 			data : {
-				"id" : getCookie("id"),
+				"userid" : getCookie("id"),
 				"jobId" : jId
 			},
 			success : function(result) {

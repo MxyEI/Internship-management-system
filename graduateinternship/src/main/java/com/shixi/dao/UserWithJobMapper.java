@@ -1,6 +1,7 @@
 package com.shixi.dao;
 
 import com.shixi.entity.UserJob;
+import com.shixi.entity.UserWithJob;
 
 /**
  * @Description: 用户岗位关联Mapper
@@ -10,13 +11,13 @@ import com.shixi.entity.UserJob;
 public interface UserWithJobMapper {
 	int deleteByPrimaryKey(Integer id);
 
-	int insert(UserJob record);
+	int insert(UserWithJob record);
 
-	int insertSelective(UserJob record);
+	int insertSelective(UserWithJob record);
 
-	UserJob selectByPrimaryKey(Integer id);
+	UserWithJob selectByPrimaryKey(Integer id);
 
-	int updateByPrimaryKeySelective(UserJob record);
+	int updateByPrimaryKeySelective(UserWithJob record);
 
-	int updateByPrimaryKey(UserJob record);
+	int updateByPrimaryKey(UserWithJob record);
 }

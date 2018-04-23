@@ -3,6 +3,9 @@ package com.shixi.service;
 import java.util.List;
 import java.util.Map;
 
+import com.shixi.dao.UserWithJobAstMapper;
+import com.shixi.dao.UserWithJobMapper;
+import com.shixi.entity.UserWithJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +23,10 @@ import com.shixi.entity.vo.UserJobVO;
 public class UserJobServiceImpl implements IUserJobService {
 
 	@Autowired
-	UserJobMapper userJobMapper;
+	UserWithJobMapper userJobMapper;
 
 	@Autowired
-	UserJobAstMapper userJobAstMapper;
+	UserWithJobAstMapper userJobAstMapper;
 
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
@@ -31,27 +34,27 @@ public class UserJobServiceImpl implements IUserJobService {
 	}
 
 	@Override
-	public int insert(UserJob record) {
+	public int insert(UserWithJob record) {
 		return userJobMapper.insert(record);
 	}
 
 	@Override
-	public int insertSelective(UserJob record) {
+	public int insertSelective(UserWithJob record) {
 		return userJobMapper.insertSelective(record);
 	}
 
 	@Override
-	public UserJob selectByPrimaryKey(Integer id) {
+	public UserWithJob selectByPrimaryKey(Integer id) {
 		return userJobMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(UserJob record) {
+	public int updateByPrimaryKeySelective(UserWithJob record) {
 		return userJobMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
-	public int updateByPrimaryKey(UserJob record) {
+	public int updateByPrimaryKey(UserWithJob record) {
 		return userJobMapper.updateByPrimaryKey(record);
 	}
 

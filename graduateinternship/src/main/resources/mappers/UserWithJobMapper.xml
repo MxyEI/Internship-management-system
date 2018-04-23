@@ -18,7 +18,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from userwithjob
-		where id = #{id,jdbcType=INTEGER}
+		where userid = #{userid,jdbcType=INTEGER}
 	</select>
 	<!-- 审批成功的不能取消申请 -->
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -27,7 +27,7 @@
 		where id = #{id,jdbcType=INTEGER} and (success=0||success is
 		null)
 	</delete>
-	<insert id="insert" parameterType="com.shixi.entity.UserWithJob">
+	<insert id="insert" parameterType="com.shixi.entity.UserWithJob"  useGeneratedKeys="true"  keyProperty="id">
 		insert into userwithjob (id,userid,
 		jobid,
 		success, gmtCreate, gmtModify,
