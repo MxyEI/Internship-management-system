@@ -181,7 +181,7 @@
 	/* 投递简历 */
 	function sendResume() {
 		if (isNotNull(detailDate.recruit.sendResumeUrl)) {
-			window.open(detailDate.recruit.sendResumeUrl);
+			window.open(detailDate.recruit.sendResumeUrl,"_blank");
 		} else {
 			alert("该公司未设置简历投递地址")
 		}

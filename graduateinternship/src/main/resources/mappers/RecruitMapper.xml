@@ -53,7 +53,7 @@
 		recruit
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.shixi.entity.Recruit">
+	<insert id="insert" parameterType="com.shixi.entity.Recruit"  useGeneratedKeys="true"  keyProperty="id">
 		insert into recruit (id,
 		companyid, address,
 		startTime, endTime, contractUser,
@@ -78,7 +78,7 @@
 		#{lapse,jdbcType=BIT},
 		#{motoley,jdbcType=LONGVARCHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="com.shixi.entity.Recruit">
+	<insert id="insertSelective" parameterType="com.shixi.entity.Recruit"  useGeneratedKeys="true"  keyProperty="id">
 		insert into recruit
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">

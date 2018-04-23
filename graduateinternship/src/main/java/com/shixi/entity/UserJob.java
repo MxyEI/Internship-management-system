@@ -13,6 +13,9 @@ import lombok.Data;
 public class UserJob implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * userid
+	 */
 	private Integer id;
 
 	/**

@@ -150,7 +150,7 @@
             document.getElementById('bcanniu').style.display="none";
         }else{
             urlstr = "${pageContext.request.contextPath}/personresume/"+getCookie("id");
-            document.getElementById('bcanniu').style.display="none";
+            document.getElementById('bcanniu').style.display="";
         }
         $.ajax({
             type : "GET",
