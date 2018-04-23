@@ -72,7 +72,7 @@
             <input name="studentid" type="text" id="studentid" hidden>
 
 
-            <input type="button" name="button" value="保存" class="button" id="bc"
+            <input type="button" name="button" value="保存" class="button" id="bcanniu"
                    onclick="saveInfo();" style="margin: 10px">
         </form>
     </div>
@@ -146,8 +146,11 @@
         var type= "student";
         if(getCookie("usertype")!=type){
             urlstr = "${pageContext.request.contextPath}/personresume/"+userId;
+            //如果不是学生则把保存按钮隐藏
+            document.getElementById('bcanniu').style.display="none";
         }else{
             urlstr = "${pageContext.request.contextPath}/personresume/"+getCookie("id");
+            document.getElementById('bcanniu').style.display="none";
         }
         $.ajax({
             type : "GET",
