@@ -104,6 +104,7 @@
 				title : '操作',
 				width : 100,
 				formatter : function(value, row, index) {
+				    console.log(row);
 					return seedetail(value, row);
 				}
 			} ] ],
@@ -125,7 +126,7 @@
 	//查看简历
     function seedetail(val,row) {
         return "<a href='${pageContext.request.contextPath}/views/jobDetail.jsp?jId="
-            + row.job.id + "' target='_blank'>查看详情</a>";
+            + row.job.id + "&vId="+row.id+"' target='_blank'>查看详情</a>";
     }
 
 	function searchUserJob() {

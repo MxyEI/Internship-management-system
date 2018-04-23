@@ -86,7 +86,7 @@
 			<result column="vGmtModify" property="gmtModify" />
 			<result column="vDr" property="dr" />
 			<association property="user" javaType="com.shixi.entity.User">
-				<result column="vId" property="id" />
+				<result column="uId" property="id" />
 				<result column="uUsername" property="username" />
 			</association>
 			<association property="job" javaType="com.shixi.entity.Job">

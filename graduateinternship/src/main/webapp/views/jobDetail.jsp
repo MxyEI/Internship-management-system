@@ -85,6 +85,7 @@
 	var about_editor;
 	//岗位id
 	var jId = getQueryStringByName("jId");
+    var vId = getQueryStringByName("vId");
 
 	$(function() {
 		jobDescribe_editor = KindEditor.create('textarea[id="jobDescribe"]', {
@@ -101,12 +102,12 @@
 	});
 	/* 检验是否已经申请该岗位 */
 	function checkIsSelected() {
-	    var userid = getCookie("id");
+
 		$.ajax({
 			type : "GET",
 			async : false,
 			url : "${pageContext.request.contextPath}/userJobs/"
-					+ userid,
+					+ vId,
 			success : function(result) {
 				if (result.resultCode == 200 && result.data != null
 						&& result.data.data != null

@@ -44,8 +44,8 @@ public class UserJobServiceImpl implements IUserJobService {
 	}
 
 	@Override
-	public UserWithJob selectByPrimaryKey(Integer userid) {
-		return userJobMapper.selectByPrimaryKey(userid);
+	public UserWithJob selectByPrimaryKey(Integer id) {
+		return userJobMapper.selectByPrimaryKey(id);
 	}
 
 	@Override

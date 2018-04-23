@@ -221,18 +221,18 @@ public class UserJobController {
 
 	/**
 	 * @Description: 获取用户申请的岗位
-	 * @param userid:用户id
+	 * @param 用户角色关联表id:vId
 	 * @author: hw
 	 * @date: 2018年3月28日 下午1:53:07
 	 */
-	@RequestMapping(value = "/{userid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result get(@PathVariable(value = "userid") Integer userid) throws Exception {
-		if (userid == null) {
+	public Result get(@PathVariable(value = "id") Integer id) throws Exception {
+		if (id == null) {
 			return ResultGenerator.genFailResult("ERROR");
 		}
-		UserWithJob result = userJobService.selectByPrimaryKey(userid);
-		log.info("request: userjob/get , userid " + userid);
+		UserWithJob result = userJobService.selectByPrimaryKey(id);
+		log.info("request: userjob/get , id " + id);
 		if (result != null) {
 			Map<String, UserWithJob> data = new HashMap<String, UserWithJob>();
 			data.put("data", result);
