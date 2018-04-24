@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>PractiveSys</display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -52,6 +52,8 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+	<!--加载druid数据源监控  访问地址http://localhost:8080/views/druid/index.html -->
 	<servlet>
 		<servlet-name>DruidStatView</servlet-name>
 		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>

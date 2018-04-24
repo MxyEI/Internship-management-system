@@ -6,3 +6,7 @@
 插件：
     后端lombock、
     前端js插件：WdatePicker、kindeditor
+    
+
+druid数据源监控
+http://localhost:8080/views/druid/index.html
