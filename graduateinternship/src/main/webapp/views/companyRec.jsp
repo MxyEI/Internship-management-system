@@ -26,7 +26,7 @@
 		<div>
 			&nbsp;宣讲时间：&nbsp;<input type="text" id="startTime" size="20"
 				readonly="readonly" />&nbsp; &nbsp;截至时间：&nbsp;<input type="text"
-				id="endTime" size="20" readonly="readonly" " />&nbsp;<a
+				id="endTime" size="20" readonly="readonly" />&nbsp;<a
 				onclick="searchJob()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">搜索</a>
 		</div>
@@ -75,7 +75,12 @@
 				title : '公司名称',
 				width : 150,
 				sortable : true
-			}, {
+			},{
+                field : 'about',
+                title : '岗位名称',
+                width : 150,
+                sortable : true
+            },{
 				field : 'address',
 				title : '地址',
 				width : 150,
@@ -100,6 +105,7 @@
 				title : '操作',
 				width : 100,
 				formatter : function(value, row, index) {
+				    console.log(row);
 					return formatHref(value, row);
 				}
 			} ] ],
@@ -152,6 +158,7 @@
 	});
 
 	function formatHref(val, row) {
+	    //传参 实习单位id
 		return "<a href='${pageContext.request.contextPath}/views/recruitDetail.jsp?id="
 				+ row.id + "' target='_blank'>查看详情</a>";
 	}
