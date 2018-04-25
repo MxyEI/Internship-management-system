@@ -60,6 +60,11 @@ public class Job implements Serializable{
 	 */
 	private Boolean lapse;
 
+	/**
+	 * 审核状态
+	 */
+	private Boolean success;
+
 	private String gmtCreate;
 
 	private String gmtModify;

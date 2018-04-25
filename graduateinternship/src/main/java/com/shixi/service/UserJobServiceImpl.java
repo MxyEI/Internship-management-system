@@ -6,12 +6,9 @@ import java.util.Map;
 import com.shixi.dao.UserWithJobAstMapper;
 import com.shixi.dao.UserWithJobMapper;
 import com.shixi.entity.UserWithJob;
+import com.shixi.entity.vo.CompanyJobVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.shixi.dao.UserJobAstMapper;
-import com.shixi.dao.UserJobMapper;
-import com.shixi.entity.UserJob;
 import com.shixi.entity.vo.UserJobVO;
 
 /**
@@ -91,6 +88,16 @@ public class UserJobServiceImpl implements IUserJobService {
 	@Override
 	public Long getTotlaAscUserJobsWithuser(Map<String,Object> map) {
 		return userJobAstMapper.getTotlaAscUserJobsWithuser(map);
+	}
+
+	@Override
+	public List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String, Object> map) {
+		return userJobAstMapper.getAllJobInfoWithNewAdd(map);
+	}
+
+	@Override
+	public Long getAllJobInfoWithNewAddCounts() {
+		return userJobAstMapper.getAllJobInfoWithNewAddCounts();
 	}
 
 }

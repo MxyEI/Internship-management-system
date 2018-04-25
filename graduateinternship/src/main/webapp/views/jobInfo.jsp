@@ -217,6 +217,7 @@
 	function searchJob() {
 		$("#dg").datagrid('load', {
 			"name" : $("#jobname").val(),
+            "companyId" : getCookie("id")
 		});
 	}
 

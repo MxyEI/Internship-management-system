@@ -47,6 +47,16 @@
 					data-options="plain:true,iconCls:'icon-wenzhang'"
 					style="width: 150px;">修改密码</a>
 			</div>
+
+			<div title="审核管理"
+				 data-options="selected:true,iconCls:'icon-wenzhangs'"
+				 style="padding: 10px; height: 10px;">
+				<a href="javascript:openTab(' 审核岗位','shenhegangwei.jsp','icon-wenzhang')"
+				   class="easyui-linkbutton"
+				   data-options="plain:true,iconCls:'icon-wenzhang'"
+				   style="width: 150px;"> 审核岗位信息</a>
+			</div>
+
 			<div title="实习管理"
 				data-options="selected:true,iconCls:'icon-wenzhangs'"
 				style="padding: 10px; height: 10px;">

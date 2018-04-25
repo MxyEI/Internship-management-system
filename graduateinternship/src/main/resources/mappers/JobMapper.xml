@@ -14,6 +14,7 @@
 		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
 		<result column="dr" jdbcType="BIT" property="dr" />
 		<result column="lapse" jdbcType="BIT" property="lapse" />
+		<result column="success" jdbcType="BIT" property="success" />
 	</resultMap>
 	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
 		type="com.shixi.entity.Job">
@@ -22,7 +23,7 @@
 	<sql id="Base_Column_List">
 		id, companyid, name, major, num, address, degree, money,
 		gmtCreate,
-		gmtModify, dr,lapse
+		gmtModify, dr,lapse,success
 	</sql>
 	<sql id="Blob_Column_List">
 		jobDescribe
@@ -39,14 +40,14 @@
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from job
 		where id = #{id,jdbcType=INTEGER} and id not in(select jobid from
-		userjob)
+		userwithjob)
 	</delete>
 	<insert id="insert" parameterType="com.shixi.entity.Job">
 		insert into job (id,
 		companyid, name,
 		major, num, address,
 		degree, money, gmtCreate,
-		gmtModify, dr, lapse,jobDescribe
+		gmtModify, dr, lapse,jobDescribe,success
 		)
 		values (#{id,jdbcType=INTEGER},
 		#{companyId,jdbcType=INTEGER},
@@ -58,7 +59,7 @@
 		#{gmtCreate,jdbcType=VARCHAR},
 		#{gmtModify,jdbcType=VARCHAR},
 		#{dr,jdbcType=BIT},#{lapse,jdbcType=BIT},
-		#{jobDescribe,jdbcType=LONGVARCHAR}
+		#{jobDescribe,jdbcType=LONGVARCHAR},#{success,jdbcType=BIT}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.shixi.entity.Job">
@@ -103,6 +104,9 @@
 			<if test="jobDescribe != null">
 				jobDescribe,
 			</if>
+			<if test="success != null">
+				success,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -144,6 +148,9 @@
 			<if test="jobDescribe != null">
 				#{jobDescribe,jdbcType=LONGVARCHAR},
 			</if>
+			<if test="success != null">
+				#{success,jdbcType=BIT},
+			</if>
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.Job">
@@ -179,6 +186,9 @@
 			<if test="lapse != null">
 				lapse = #{lapse,jdbcType=BIT},
 			</if>
+			<if test="success != null">
+				success = #{success,jdbcType=BIT},
+			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
@@ -199,7 +209,8 @@
 		jobDescribe =
 		#{jobDescribe,jdbcType=LONGVARCHAR},
 		lapse =
-		#{lapse,jdbcType=BIT}
+		#{lapse,jdbcType=BIT},success =
+		#{success,jdbcType=BIT}
 		where
 		id = #{id,jdbcType=INTEGER}
 	</update>
@@ -218,7 +229,8 @@
 		money = #{money,jdbcType=VARCHAR},
 		gmtModify = #{gmtModify,jdbcType=VARCHAR},
 		dr = #{dr,jdbcType=BIT},
-		lapse = #{lapse,jdbcType=BIT}
+		lapse = #{lapse,jdbcType=BIT},success =
+		#{success,jdbcType=BIT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<select id="selectJobsByName" parameterType="Map" resultMap="ResultMapWithBLOBs">

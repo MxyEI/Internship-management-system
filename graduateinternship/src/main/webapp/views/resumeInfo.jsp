@@ -43,7 +43,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'gmtCreate',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -100,10 +100,15 @@
 					}
                 }
 			}, {
+                field : 'gmtCreate',
+                title : '申请时间',
+                width : 150,
+                sortable : true
+            },{
 				field : 'gmtModify',
 				title : '修改时间',
 				width : 200,
-				sortable : true
+				hidden : true
 			}, {
                 field : 'status',
                 title : '简历信息',
@@ -185,7 +190,8 @@
 	function searchUserJob() {
 		$("#dg").datagrid('load', {
 			"job.name" : $("#jobname").val(),
-			"user.realname" : $("#realname").val()
+			"user.realname" : $("#realname").val(),
+			"companyId":getCookie("id")
 		});
 	}
 </script>

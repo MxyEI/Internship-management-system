@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shixi.entity.UserWithJob;
+import com.shixi.entity.vo.CompanyJobVO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -277,6 +278,36 @@ public class UserJobController {
 		} else {
 			return ResultGenerator.genFailResult("FAIL");
 		}
+	}
+
+
+	/**
+	 * @Description: 管理部门查看所有公司申请发布的岗位信息
+	 * @author: hw
+	 * @date: 2018年4月25日 下午1:46:21
+	 */
+	@RequestMapping(value = "/datagridwithshenhe", method = RequestMethod.GET)
+	public String listwithshenhe(@RequestParam(value = "page", required = false) String page,
+					   @RequestParam(value = "rows", required = false) String rows,
+					   @RequestParam(value = "sort", required = false) String sort,
+					   @RequestParam(value = "order", required = false) String order, UserJobVO userJob,
+					   HttpServletResponse response) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (page != null && rows != null) {
+			PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+			map.put("start", pageBean.getStart());
+			map.put("size", pageBean.getPageSize());
+		}
+
+		List<CompanyJobVO> list = userJobService.getAllJobInfoWithNewAdd(map);
+		Long total = userJobService.getAllJobInfoWithNewAddCounts();
+		JSONObject result = new JSONObject();
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		result.put("rows", jsonArray);
+		result.put("total", total);
+		log.info("request: userjobs/datagridwithshenhe , map: " + map.toString());
+		ResponseUtil.write(response, result);
+		return null;
 	}
 
 

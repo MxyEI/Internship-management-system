@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shixi.dao.UserWithJobAstMapper;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.shixi.dao.CompanyAstMapper;
 import com.shixi.dao.ScoreAstMapper;
-import com.shixi.dao.UserJobAstMapper;
 import com.shixi.entity.User;
 import com.shixi.entity.vo.ScoreVO;
 import com.shixi.entity.vo.UserJobVO;
@@ -33,7 +33,7 @@ public class MybatisTest {
 	CompanyAstMapper companyAstMapper;
 
 	@Autowired
-	UserJobAstMapper userJobAstMapper;
+	UserWithJobAstMapper userJobAstMapper;
 
 	@Autowired
 	ScoreAstMapper scoreAstMapper;
