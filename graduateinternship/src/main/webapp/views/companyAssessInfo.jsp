@@ -33,9 +33,15 @@
 <table id="dg"></table>
 </body>
 <script type="text/javascript">
+    var urls;
     $(function() {
+        if(getCookie("usertype")=="company"){
+           urls  = "${pageContext.request.contextPath}/userJobs/datagridwithsuccess?companyId="+getCookie("id");
+		}else{
+            urls ="${pageContext.request.contextPath}/userJobs/datagridwithsuccess";
+		}
         dataGrid = $('#dg').datagrid({
-            url : '${pageContext.request.contextPath}/userJobs/datagridwithsuccess',
+            url : urls,
             method : 'GET',
             fit : false,
             fitColumns : true,
@@ -52,9 +58,9 @@
             striped : true,
             rownumbers : true,
             singleSelect : true,
-            queryParams : {
-                companyId : getCookie("id")
-            },
+//            queryParams : {
+//                companyId : getCookie("id")
+//            },
             frozenColumns : [ [ {
                 field : 'dd',
                 title : '',

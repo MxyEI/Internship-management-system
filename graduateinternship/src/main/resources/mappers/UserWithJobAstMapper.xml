@@ -26,25 +26,6 @@
 
 	</resultMap>
 
-	<!-- 公司 岗位 关联 -->
-	<resultMap id="CompanyJobAscResultMap" type="com.shixi.entity.vo.CompanyJobVO">
-		<result column="jSuccess" property="success" />
-		<result column="jGmtCreate" property="gmtCreate" />
-		<result column="jGmtModify" property="gmtModify" />
-		<association property="job" javaType="com.shixi.entity.Job">
-			<result column="jId" property="id" />
-			<result column="jName" property="name" />
-			<result column="jSuccess" property="success" />
-			<result column="jGmtCreate" property="gmtCreate" />
-			<result column="jGmtModify" property="gmtModify" />
-		</association>
-		<association property="company" javaType="com.shixi.entity.Company">
-			<id column="cId" property="id" />
-			<result column="comName" property="name" />
-		</association>
-
-	</resultMap>
-
 	<!-- 岗位sql -->
 	<!-- 统一取别名，避免名字冲突，导致获取不到值 -->
 	<sql id="jobSql">
@@ -178,7 +159,12 @@
 				and companyid=#{companyId}
 			</if>
 		</where>
-		) and com.name in(select name from company where id = #{companyId}) and v.success=1
+		)
+		<if test="companyId!=null">
+				and com.name in(select name from company where id = #{companyId})
+		</if>
+
+		and v.success=1
 		<if test="userId!=null">
 			and v.userid = #{userId}
 		</if>
@@ -279,19 +265,5 @@
 		</if>
 	</select>
 
-	<!-- 管理部门查询实习单位发布的新岗位信息的数量 -->
-	<select id="getAllJobInfoWithNewAddCounts" resultType="Long">
-		select  count(*)
-		from job j  inner join company com on j.companyid= com.id
-	</select>
-
-	<!--&lt;!&ndash; 管理部门查询实习单位发布的新岗位信息的数量 &ndash;&gt;-->
-	<!--<select id="getAllJobInfoWithNewAdd" parameterType="Map" resultType="CompanyJobAscResultMap">-->
-		<!--select  j.id as jId,j.name as jName,j.gmtCreate as jGmtCreate,j.gmtModify as jGmtModify,com.id as cId,com.name as comName ,j.success as jSuccess-->
-		<!--from job j  inner join company com on j.companyid= com.id  order by j.gmtcreate desc-->
-		<!--<if test="start!=null and size!=null">-->
-			<!--limit #{start},#{size}-->
-		<!--</if>-->
-	<!--</select>-->
 
 </mapper>

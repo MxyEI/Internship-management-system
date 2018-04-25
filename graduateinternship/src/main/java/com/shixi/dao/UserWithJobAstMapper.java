@@ -56,18 +56,4 @@ public interface UserWithJobAstMapper {
 	 * @date: 2018年4月21日 下午12:54:40
 	 */
 	Long getTotlaAscUserJobsWithuser(Map<String,Object> map);
-
-	/**
-	 * @Description: 管理部门查询实习单位发布的新岗位信息并审核
-	 * @author: hw
-	 * @date: 2018年4月25日 下午12:54:40
-	 */
-	List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String,Object> map);
-
-	/**
-	 * @Description: 管理部门查询实习单位发布的新岗位信息的数量
-	 * @author: hw
-	 * @date: 2018年4月25日 下午12:54:40
-	 */
-	Long getAllJobInfoWithNewAddCounts();
 }

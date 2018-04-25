@@ -133,7 +133,7 @@ public class UserJobController {
 			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));
 		}
 		//log.info(userJob);
-		List<UserJobVO> list = userJobService.findAscUserJobsByUserid(map);
+		List<UserJobVO> list = userJobService.findAscUserJobsWithSuccess(map);
 		Long total = userJobService.getTotlaAscUserJobsWithSuccess(map);
 		JSONObject result = new JSONObject();
 		JSONArray jsonArray = JSONArray.fromObject(list);
@@ -290,7 +290,7 @@ public class UserJobController {
 	public String listwithshenhe(@RequestParam(value = "page", required = false) String page,
 					   @RequestParam(value = "rows", required = false) String rows,
 					   @RequestParam(value = "sort", required = false) String sort,
-					   @RequestParam(value = "order", required = false) String order, UserJobVO userJob,
+					   @RequestParam(value = "order", required = false) String order, CompanyJobVO companyJobVO,
 					   HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (page != null && rows != null) {

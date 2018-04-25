@@ -230,6 +230,7 @@
 		}
 		$.messager.confirm("系统提示", "您确认要删除这</font>条数据吗？", function(r) {
 			if (r) {
+			    console.log(selectedRows);
 				$.ajax({
 					type : "DELETE",
 					url : url + "/" + selectedRows[0].id,
@@ -238,7 +239,7 @@
 							$.messager.alert("系统提示", "数据已成功删除！");
 							$("#dg").datagrid("reload");
 						} else {
-							$.messager.alert(result.messager);
+							alert(result.message);
 						}
 
 						;

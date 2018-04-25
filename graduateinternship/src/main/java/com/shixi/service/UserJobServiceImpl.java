@@ -3,6 +3,7 @@ package com.shixi.service;
 import java.util.List;
 import java.util.Map;
 
+import com.shixi.dao.CompanyWithJobMapper;
 import com.shixi.dao.UserWithJobAstMapper;
 import com.shixi.dao.UserWithJobMapper;
 import com.shixi.entity.UserWithJob;
@@ -24,6 +25,8 @@ public class UserJobServiceImpl implements IUserJobService {
 
 	@Autowired
 	UserWithJobAstMapper userJobAstMapper;
+
+	CompanyWithJobMapper companyWithJobMapper;
 
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
@@ -92,12 +95,12 @@ public class UserJobServiceImpl implements IUserJobService {
 
 	@Override
 	public List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String, Object> map) {
-		return userJobAstMapper.getAllJobInfoWithNewAdd(map);
+		return companyWithJobMapper.getAllJobInfoWithNewAdd();
 	}
 
 	@Override
 	public Long getAllJobInfoWithNewAddCounts() {
-		return userJobAstMapper.getAllJobInfoWithNewAddCounts();
+		return companyWithJobMapper.getAllJobInfoWithNewAddCounts();
 	}
 
 }

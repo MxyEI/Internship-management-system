@@ -27,5 +27,4 @@ public class CompanyJobVO implements Serializable {
 
     private String gmtModify;
 
-    private Boolean dr;
 }
