@@ -173,10 +173,33 @@
 				sortable : true
 			}, {
 				field : 'lapse',
-				title : '失效',
+				title : '是否生效',
 				width : 150,
-				sortable : true
+				sortable : true,
+                formatter : function(value, row, index) {
+
+                    if(value==true){
+                        return "失效"
+                    }else{
+                        //console.log(row);
+                        return "生效"
+                    }
+                }
 			}, {
+                field : 'success',
+                title : '审核状态',
+                width : 150,
+                sortable : true,
+				formatter : function(value, row, index) {
+
+                    if(value==true){
+                        return "通过"
+                    }else{
+                        //console.log(row);
+                        return "不通过"
+                    }
+                }
+            },{
 				field : 'gmtCreate',
 				title : '创建时间',
 				width : 150,

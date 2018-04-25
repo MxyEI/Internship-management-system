@@ -50,7 +50,6 @@
 								<h1 class="dm-text" style="font-weight: normal;"
 									id="company_name"></h1>
 								<p class="dm-text" id="recruit_startTime"></p>
-								<p class="dm-text">所在学校：</p>
 								<p class="dm-text" id="recruit_address"></p>
 							</div>
 						</div>
@@ -142,7 +141,7 @@
 					setDate();
 					setJobInfo();
 				} else {
-					alert("错误代码：" + result.resultCode);
+					alert("提示：此公司无在招岗位 " + result.message);
 				}
 			},
 			error : function() {

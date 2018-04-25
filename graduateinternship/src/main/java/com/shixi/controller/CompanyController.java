@@ -160,7 +160,7 @@ public class CompanyController {
 			data.put("data", result.get(0));
 			return ResultGenerator.genSuccessResult(data);
 		} else {
-			return ResultGenerator.genFailResult("FAIL");
+			return ResultGenerator.genFailResult("此公司无在招岗位");
 		}
 	}
 

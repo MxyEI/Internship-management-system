@@ -150,7 +150,7 @@
 					detailDate = result.data.data;
 					setDate();
 				} else {
-					alert("错误代码：" + result.resultCode);
+					alert("提示：" + result.message);
 				}
 			},
 			error : function() {

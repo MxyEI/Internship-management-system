@@ -28,6 +28,7 @@
 			<result column="jGmtModify" jdbcType="VARCHAR" property="gmtModify" />
 			<result column="jDr" jdbcType="BIT" property="dr" />
 			<result column="jobDescribe" jdbcType="LONGVARCHAR" property="jobDescribe" />
+			<result column="jSuccess" jdbcType="BIT" property="success" />
 		</collection>
 	</resultMap>
 	<!-- 公司 招聘信息 一对一 -->
@@ -93,6 +94,7 @@
 				<id column="id" property="jobid" />
 				<result column="jId" property="id" />
 				<result column="jName" property="name" />
+				<result column="jSuccess" property="success" />
 			</association>
 		</collection>
 	</resultMap>
@@ -111,7 +113,7 @@
 		jNum,j.address as jAddress,j.degree as jDegree,
 		j.money as
 		jMoney,j.jobDescribe,j.gmtCreate as jGmtCreate,j.gmtModify as
-		jGmtModify,j.dr as jDr
+		jGmtModify,j.dr as jDr,j.success as jSuccess
 	</sql>
 
 	<!-- 招聘信息sql -->
@@ -229,6 +231,7 @@
 			</if>
 			and (j.lapse=0||j.lapse is null)
 		</where>
+		and j.success=1
 	</select>
 	<!-- 用户申请某个岗位后，公司如果批准，就可以通过用户id查找公司的信息 -->
 	<select id="findCompanyInfoByUserId" parameterType="java.lang.Integer"
