@@ -1,6 +1,7 @@
 package com.shixi.dao;
 
 import com.shixi.entity.vo.CompanyJobVO;
+import com.shixi.entity.vo.CompanyVO;
 import com.shixi.entity.vo.UserJobVO;
 import org.springframework.stereotype.Repository;
 
@@ -20,12 +21,12 @@ public interface CompanyWithJobMapper {
 	 * @author: hw
 	 * @date: 2018年4月25日 下午12:54:40
 	 */
-	List<CompanyJobVO> getAllJobInfoWithNewAdd();
+	List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String, Object> map);
 
 	/**
 	 * @Description: 管理部门查询实习单位发布的新岗位信息的数量
 	 * @author: hw
 	 * @date: 2018年4月25日 下午12:54:40
 	 */
-	Long getAllJobInfoWithNewAddCounts();
+	Long getAllJobInfoWithNewAddCounts(Map<String, Object> map);
 }

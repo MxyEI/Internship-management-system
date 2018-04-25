@@ -3,6 +3,8 @@ package com.shixi.service;
 import java.util.List;
 import java.util.Map;
 
+import com.shixi.dao.CompanyWithJobMapper;
+import com.shixi.entity.vo.CompanyJobVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,9 @@ public class CompanyServiceImpl implements ICompanyService {
 
 	@Autowired
 	private CompanyAstMapper companyAstMapper;
+
+	@Autowired
+	private CompanyWithJobMapper companyWithJobMapper;
 
 	@Override
 	public int insert(Company record) {
@@ -83,5 +88,15 @@ public class CompanyServiceImpl implements ICompanyService {
 	@Override
 	public CompanyVO findCompanyInfoByUserId(Integer userId) {
 		return companyAstMapper.findCompanyInfoByUserId(userId);
+	}
+
+	@Override
+	public List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String, Object> map) {
+		return companyWithJobMapper.getAllJobInfoWithNewAdd(map);
+	}
+
+	@Override
+	public Long getAllJobInfoWithNewAddCounts(Map<String, Object> map) {
+		return companyWithJobMapper.getAllJobInfoWithNewAddCounts(map);
 	}
 }

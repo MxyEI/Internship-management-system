@@ -3,6 +3,7 @@ package com.shixi.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.shixi.entity.vo.CompanyJobVO;
 import com.shixi.entity.vo.CompanyVO;
 
 /**
@@ -45,4 +46,5 @@ public interface CompanyAstMapper {
 	 * @date: 2018年4月1日 下午1:01:49
 	 */
 	CompanyVO findCompanyInfoByUserId(Integer userId);
+
 }

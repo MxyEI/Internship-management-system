@@ -34,7 +34,7 @@
 <script type="text/javascript">
     $(function() {
         dataGrid = $('#dg').datagrid({
-            url : '${pageContext.request.contextPath}/userJobs/datagridwithshenhe',
+            url : '${pageContext.request.contextPath}/companys/datagridwithshenhe',
             method : 'GET',
             fit : false,
             fitColumns : true,
@@ -43,7 +43,7 @@
             idField : 'id',
             pageSize : 10,
             pageList : [ 10, 20, 30, 40, 50 ],
-            sortName : 'j.gmtCreate',
+            sortName : 'id',
             sortOrder : 'desc',
             checkOnSelect : false,
             selectOnCheck : false,
@@ -63,19 +63,14 @@
                 width : 150,
                 hidden : true
             },{
-                field : 'user.id',
+                field : 'job.id',
                 title : '用户编号',
                 width : 150,
                 hidden : true
             } ] ],
             columns : [ [ {
-                field : 'user.username',
-                title : '用户名',
-                width : 150,
-                sortable : true
-            }, {
-                field : 'user.realname',
-                title : '真实姓名',
+                field : 'company.name',
+                title : '单位名称',
                 width : 150,
                 sortable : true
             }, {
@@ -85,7 +80,7 @@
                 sortable : true
             }, {
                 field : 'success',
-                title : '申请状态',
+                title : '审核状态',
                 width : 100,
                 sortable : true,
                 formatter : function(value, row, index) {
@@ -98,18 +93,10 @@
                     }
                 }
             }, {
-                field : 'gmtModify',
-                title : '修改时间',
+                field : 'gmtCreate',
+                title : '申请时间',
                 width : 200,
                 sortable : true
-            }, {
-                field : 'status',
-                title : '简历信息',
-                width : 100,
-                formatter : function(value, row, index) {
-                    console.log(row);
-                    return seejianli(row.user.id);
-                }
             }, {
                 field : 'action',
                 title : '操作',
@@ -140,13 +127,12 @@
         return "批准";
     }
 
-    function sendResume(success, id,userid) {
+    function sendResume(success, id) {
         $.ajax({
             type : "PATCH",
-            url : "${pageContext.request.contextPath}/userJobs",
+            url : "${pageContext.request.contextPath}/jobs/shenhe",
             data : {
                 "id" : id,
-                "userid":userid,
                 "success" : !success
             },
             success : function(result) {
@@ -167,17 +153,11 @@
         //<a onclick='sendResume(row.success,row.id) class='easyui-linkbutton' iconCls='icon-ok'> resume(row.success)</a><a onclick='seejianli(row)'>查看简历</a>
         var str = new StringBuffer();
         str.append("<a onclick='sendResume(");
-        str.append(row.success).append(",").append(row.id).append(",").append(row.user.id);
+        str.append(row.success).append(",").append(row.job.id);
         str.append(")' class='easyui-linkbutton' iconCls='icon-ok'>");
         str.append(resume(row.success));
         str.append("</a> ");
         return str.toString();
-    }
-
-    //查看简历
-    function seejianli(id) {
-        return "<a href='${pageContext.request.contextPath}/views/jianli.jsp?userid="
-            + id + "' target='_blank'>查看简历</a>";
     }
 
     function searchUserJob() {

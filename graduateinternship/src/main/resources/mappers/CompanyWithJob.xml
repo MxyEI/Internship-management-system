@@ -8,30 +8,35 @@
 		<result column="jGmtCreate" property="gmtCreate" />
 		<result column="jGmtModify" property="gmtModify" />
 		<association property="job" javaType="com.shixi.entity.Job">
-			<id column="id" property="id" />
+			<result column="jId" property="id" />
 			<result column="jName" property="name" />
 			<result column="jSuccess" property="success" />
 			<result column="jGmtCreate" property="gmtCreate" />
 			<result column="jGmtModify" property="gmtModify" />
 		</association>
 		<association property="company" javaType="com.shixi.entity.Company">
-			<id column="id" property="id" />
+			<result column="cId" property="id" />
 			<result column="comName" property="name" />
 		</association>
 
 	</resultMap>
 
 	<!-- 管理部门查询实习单位发布的新岗位信息的数量 -->
-	<select id="getAllJobInfoWithNewAddCounts" resultType="Long">
+	<select id="getAllJobInfoWithNewAddCounts" parameterType="Map" resultType="Long">
 		select  count(*)
 		from job j  inner join company com on j.companyid= com.id
 	</select>
 
 	<!-- 管理部门查询实习单位发布的新岗位信息 -->
-	<select id="getAllJobInfoWithNewAdd" resultMap="CompanyJobAscResultMap">
+	<select id="getAllJobInfoWithNewAdd" parameterType="Map" resultMap="CompanyJobAscResultMap">
 		select  j.id as jId,j.name as jName,j.gmtCreate as jGmtCreate,j.gmtModify as jGmtModify,com.id as cId,com.name as comName,j.success as jSuccess
 		from job j  inner join company com on j.companyid= com.id
-
+		<if test="sort!=null and sort!='' and order!=null and order!=''">
+			order by ${sort} ${order}
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
 	</select>
 
 </mapper>

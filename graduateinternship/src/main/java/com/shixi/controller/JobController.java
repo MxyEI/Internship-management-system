@@ -119,6 +119,27 @@ public class JobController {
 	}
 
 	/**
+	 * @Description: 审核功能 批准
+	 * @author: hw
+	 * @date: 2018年4月28日 下午1:44:44
+	 */
+	@RequestMapping(value = "/shenhe", method = RequestMethod.PATCH)
+	@ResponseBody
+	public Result updates(Job job) throws Exception {
+		int resultTotal = 0;
+		job.setGmtModify(DateUtil.getCurrentDateStr());
+		resultTotal = jobService.updateByPrimaryKeySelective(job);
+		log.info("request: job/update , " + job.toString());
+		if (resultTotal > 0) {
+			return ResultGenerator.genSuccessResult();
+		} else {
+			return ResultGenerator.genFailResult("修改失败");
+		}
+	}
+
+
+
+	/**
 	 * @Description: 查询岗位信息
 	 * @author: hw
 	 * @date: 2018年3月28日 下午1:44:52

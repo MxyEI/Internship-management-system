@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shixi.entity.Company;
+import com.shixi.entity.vo.CompanyJobVO;
 import com.shixi.entity.vo.CompanyVO;
 
 /**
@@ -35,4 +36,8 @@ public interface ICompanyService {
 	List<CompanyVO> findCompanyRecruitJobs(Map<String, Object> map);
 
 	CompanyVO findCompanyInfoByUserId(Integer userId);
+
+	//审核
+	List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String, Object> map);
+	Long getAllJobInfoWithNewAddCounts(Map<String, Object> map);
 }

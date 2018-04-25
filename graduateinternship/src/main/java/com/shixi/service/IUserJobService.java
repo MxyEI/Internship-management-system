@@ -3,9 +3,8 @@ package com.shixi.service;
 import java.util.List;
 import java.util.Map;
 
-import com.shixi.entity.UserJob;
 import com.shixi.entity.UserWithJob;
-import com.shixi.entity.vo.CompanyJobVO;
+import com.shixi.entity.vo.CompanyVO;
 import com.shixi.entity.vo.UserJobVO;
 
 /**
@@ -39,8 +38,5 @@ public interface IUserJobService {
 
 	List<UserJobVO> findAscUserJobsWithUserid(Map<String,Object> map);
 	Long getTotlaAscUserJobsWithuser(Map<String,Object> map);
-
-	List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String,Object> map);
-	Long getAllJobInfoWithNewAddCounts();
 
 }

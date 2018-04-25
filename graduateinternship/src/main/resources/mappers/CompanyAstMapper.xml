@@ -241,4 +241,6 @@
 		j.companyid = c.id
 		where v.userid=#{id} and v.success=1
 	</select>
+
+
 </mapper>
