@@ -21,9 +21,9 @@
 <body style="margin: 1px;" id="ff">
 <div id="tb">
 	<div>
-		&nbsp;实习单位名称：&nbsp;<input type="text" id="jobname" size="20"
+		&nbsp;实习单位名称：&nbsp;<input type="text" id="comname" size="20"
 								onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;
-		地址：&nbsp;<input type="text" id="realname" size="20"
+		地址：&nbsp;<input type="text" id="comaddr" size="20"
 						  onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;&nbsp;<a
 			onclick="searchUserJob()" class="easyui-linkbutton"
 			iconCls="icon-search" plain="true">搜索</a>
@@ -162,8 +162,8 @@
 
     function searchUserJob() {
         $("#dg").datagrid('load', {
-            "name" : $("#name").val(),
-            "address" : $("#address").val()
+            "name" : $("#comname").val(),
+            "address" : $("#comaddr").val()
         });
     }
 </script>
