@@ -46,8 +46,18 @@ public class CompanyServiceImpl implements ICompanyService {
 	}
 
 	@Override
+	public List<Company> getAllComInfoWithNewAdd(Map<String, Object> map) {
+		return companyMapper.getAllComInfoWithNewAdd(map);
+	}
+
+	@Override
+	public Long getAllComInfoWithNewAddCounts() {
+		return companyMapper.getAllComInfoWithNewAddCounts();
+	}
+
+	@Override
 	public int updateByPrimaryKeySelective(Company record) {
-		return companyMapper.updateByPrimaryKey(record);
+		return companyMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override

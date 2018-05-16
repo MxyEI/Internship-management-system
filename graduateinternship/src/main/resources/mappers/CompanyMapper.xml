@@ -7,6 +7,7 @@
     <result column="world" jdbcType="VARCHAR" property="world" />
     <result column="scale" jdbcType="VARCHAR" property="scale" />
     <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="success" jdbcType="BIT" property="success" />
     <result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
     <result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
     <result column="dr" jdbcType="BIT" property="dr" />
@@ -15,7 +16,7 @@
     <result column="about" jdbcType="LONGVARCHAR" property="about" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, world, scale, address, gmtCreate, gmtModify, dr
+    id, name, world, scale, address,success, gmtCreate, gmtModify, dr
   </sql>
   <sql id="Blob_Column_List">
     about
@@ -28,18 +29,39 @@
     from company
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+
+  <!-- 新注册的实习单位待审核的数量 -->
+  <select id="getAllComInfoWithNewAddCounts"  resultType="Long">
+    select  count(*)
+    from company com
+  </select>
+
+  <!-- 新注册的实习单位待审核的信息 -->
+  <select id="getAllComInfoWithNewAdd" parameterType="Map" resultMap="BaseResultMap">
+    select *
+    from company com
+    <if test="sort!=null and sort!='' and order!=null and order!=''">
+      order by ${sort} ${order}
+    </if>
+    <if test="start!=null and size!=null">
+      limit #{start},#{size}
+    </if>
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from company
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.shixi.entity.Company"  useGeneratedKeys="true"  keyProperty="id">
     insert into company (id, name, world, 
-      scale, address, gmtCreate, 
-      gmtModify, dr, about
+      scale, address, gmtCreate,
+      gmtModify, dr, about,success
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{world,jdbcType=VARCHAR}, 
       #{scale,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=VARCHAR}, 
-      #{gmtModify,jdbcType=VARCHAR}, #{dr,jdbcType=BIT}, #{about,jdbcType=LONGVARCHAR}
+      #{gmtModify,jdbcType=VARCHAR}, #{dr,jdbcType=BIT}, #{about,jdbcType=LONGVARCHAR},#{success,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.shixi.entity.Company">
@@ -72,6 +94,9 @@
       <if test="about != null">
         about,
       </if>
+      <if test="success != null">
+        success,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -100,6 +125,9 @@
       </if>
       <if test="about != null">
         #{about,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="success != null">
+        #{success,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -130,6 +158,9 @@
       <if test="about != null">
         about = #{about,jdbcType=LONGVARCHAR},
       </if>
+      <if test="success != null">
+        success = #{success,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -142,7 +173,8 @@
       gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
       gmtModify = #{gmtModify,jdbcType=VARCHAR},
       dr = #{dr,jdbcType=BIT},
-      about = #{about,jdbcType=LONGVARCHAR}
+      about = #{about,jdbcType=LONGVARCHAR},
+      success = #{success,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shixi.entity.Company">
@@ -153,7 +185,8 @@
       address = #{address,jdbcType=VARCHAR},
       gmtCreate = #{gmtCreate,jdbcType=VARCHAR},
       gmtModify = #{gmtModify,jdbcType=VARCHAR},
-      dr = #{dr,jdbcType=BIT}
+      dr = #{dr,jdbcType=BIT},
+      success = #{success,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

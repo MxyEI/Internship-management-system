@@ -11,6 +11,7 @@
 		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
 		<result column="dr" jdbcType="BIT" property="dr" />
 		<result column="about" jdbcType="LONGVARCHAR" property="about" />
+		<result column="success" jdbcType="BIT" property="success" />
 	</resultMap>
 	<!-- 公司 岗位 一对多 -->
 	<resultMap id="CompanyJobsResultMap" type="com.shixi.entity.vo.CompanyVO"
@@ -103,7 +104,7 @@
 	<sql id="companySql">
 		c.id, c.name, c.world, c.scale, c.address,
 		c.gmtCreate,
-		c.gmtModify, c.dr,c.about
+		c.gmtModify, c.dr,c.about,c.success
 	</sql>
 
 	<!-- 岗位sql -->

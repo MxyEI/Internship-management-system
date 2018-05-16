@@ -45,6 +45,11 @@ public class CompanyVO implements Serializable{
 	private String about;
 
 	/**
+	 * 审核状态
+	 */
+	private Boolean success;
+
+	/**
 	 * 招聘信息
 	 */
 	private Recruit recruit;

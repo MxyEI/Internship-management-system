@@ -21,6 +21,10 @@ public interface ICompanyService {
 
 	Company selectByPrimaryKey(Integer id);
 
+	//审核新注册的实习单位信息
+	List<Company> getAllComInfoWithNewAdd(Map<String, Object> map);
+	Long getAllComInfoWithNewAddCounts();
+
 	int updateByPrimaryKeySelective(Company record);
 
 	int updateByPrimaryKeyWithBLOBs(Company record);
@@ -37,7 +41,7 @@ public interface ICompanyService {
 
 	CompanyVO findCompanyInfoByUserId(Integer userId);
 
-	//审核
+	//审核岗位信息
 	List<CompanyJobVO> getAllJobInfoWithNewAdd(Map<String, Object> map);
 	Long getAllJobInfoWithNewAddCounts(Map<String, Object> map);
 }

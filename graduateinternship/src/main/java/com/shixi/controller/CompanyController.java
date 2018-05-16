@@ -117,6 +117,25 @@ public class CompanyController {
 		}
 	}
 
+
+	/**
+	 * @Description: 审核实习公司的信息
+	 * @author: hw
+	 * @date: 2018年3月28日 下午1:43:52
+	 */
+	@RequestMapping(value = "/shenhecominfo", method = RequestMethod.POST)
+	@ResponseBody
+	public Result shenhecominfo(Company company) throws Exception {
+		int resultTotal = 0;
+		resultTotal = companyService.updateByPrimaryKeySelective(company);
+		log.info("request: company/shenhecominfo , " + company.toString());
+		if (resultTotal > 0) {
+			return ResultGenerator.genSuccessResult();
+		} else {
+			return ResultGenerator.genFailResult("修改失败");
+		}
+	}
+
 	/**
 	 * @Description: 查询某个公司信息
 	 * @author: hw
@@ -235,6 +254,36 @@ public class CompanyController {
 		result.put("rows", jsonArray);
 		result.put("total", total);
 		log.info("request: userjobs/datagridwithshenhe , map: " + map.toString());
+		ResponseUtil.write(response, result);
+		return null;
+	}
+
+
+	/**
+	 * @Description: 审核新注册的实习单位信息
+	 * @author: mxy
+	 * @date: 2018年5月18日 下午1:46:21
+	 */
+	@RequestMapping(value = "/datagridwithnewcom", method = RequestMethod.GET)
+	public String listwithnewcom(@RequestParam(value = "page", required = false) String page,
+								 @RequestParam(value = "rows", required = false) String rows,
+								 @RequestParam(value = "sort", required = false) String sort,
+								 @RequestParam(value = "order", required = false) String order, Company company,
+								 HttpServletResponse response) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (page != null && rows != null) {
+			PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+			map.put("start", pageBean.getStart());
+			map.put("size", pageBean.getPageSize());
+		}
+
+		List<Company> list = companyService.getAllComInfoWithNewAdd(map);
+		Long total = companyService.getAllComInfoWithNewAddCounts();
+		JSONObject result = new JSONObject();
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		result.put("rows", jsonArray);
+		result.put("total", total);
+		log.info("request: cominfo/datagridwithnewcom , map: " + map.toString());
 		ResponseUtil.write(response, result);
 		return null;
 	}

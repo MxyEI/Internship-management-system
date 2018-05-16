@@ -48,6 +48,7 @@
 				</div>
 				<button type="button" class="btn btn-primary block full-width m-b"
 					onclick="login();">登 录</button>
+				<a href="/register.jsp">我想注册实习单位，请点这里</a>
 			</form>
 		</div>
 	</div>

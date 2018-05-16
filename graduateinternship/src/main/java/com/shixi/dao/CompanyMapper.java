@@ -2,6 +2,9 @@ package com.shixi.dao;
 
 import com.shixi.entity.Company;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Description: 公司Mapper
  * @author: hw
@@ -15,6 +18,20 @@ public interface CompanyMapper {
 	int insertSelective(Company record);
 
 	Company selectByPrimaryKey(Integer id);
+
+	/**
+	 * @Description: 新注册的实习单位待审核的信息
+	 * @author: mxy
+	 * @date: 2018年5月18日 下午12:54:40
+	 */
+	List<Company> getAllComInfoWithNewAdd(Map<String, Object> map);
+
+	/**
+	 * @Description: 新注册的实习单位待审核的数量
+	 * @author: mxy
+	 * @date: 2018年5月18日 下午12:54:40
+	 */
+	Long getAllComInfoWithNewAddCounts();
 
 	int updateByPrimaryKeySelective(Company record);
 

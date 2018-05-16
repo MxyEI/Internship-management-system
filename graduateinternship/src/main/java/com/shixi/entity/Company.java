@@ -40,6 +40,11 @@ public class Company implements Serializable {
 	 */
 	private String about;
 
+	/**
+	 * 审核状态
+	 */
+	private Boolean success;
+
 	private String gmtCreate;
 
 	private String gmtModify;
