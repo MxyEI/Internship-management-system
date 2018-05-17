@@ -246,6 +246,8 @@ public class CompanyController {
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
 		}
+
+		//搜索方式为后端搜索
 		if (companyJobVO.getJob() != null&&companyJobVO.getJob().getName()!="") {
 			map.put("jobname", companyJobVO.getJob().getName());
 		}
@@ -259,7 +261,7 @@ public class CompanyController {
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		result.put("rows", jsonArray);
 		result.put("total", total);
-		log.info("request: userjobs/datagridwithshenhe , map: " + map.toString());
+		log.info("request: companyctl/datagridwithshenhe , map: " + map.toString());
 		ResponseUtil.write(response, result);
 		return null;
 	}
