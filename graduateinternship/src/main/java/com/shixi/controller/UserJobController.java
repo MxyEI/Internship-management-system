@@ -132,12 +132,21 @@ public class UserJobController {
 			}
 			map.put("sort", sort);
 		}
-		if (userJob.getUser() != null && userJob.getUser().getRealname() != null) {
+//		if (userJob.getUser() != null && userJob.getUser().getRealname() != null) {
+//			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
+//		}
+//		if (userJob.getJob() != null && userJob.getJob().getName() != null) {
+//			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));
+//		}
+
+		//按学号（用户名）和真实姓名搜索
+		if (userJob.getUser() != null && userJob.getUser().getUsername() != "") {
+			map.put("username", StringUtil.formatLike(userJob.getUser().getUsername()));
+		}
+		if (userJob.getUser() != null && userJob.getUser().getRealname() != "") {
 			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
 		}
-		if (userJob.getJob() != null && userJob.getJob().getName() != null) {
-			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));
-		}
+
 		//log.info(userJob);
 		List<UserJobVO> list = userJobService.findAscUserJobsWithSuccess(map);
 		Long total = userJobService.getTotlaAscUserJobsWithSuccess(map);
@@ -186,8 +195,8 @@ public class UserJobController {
 			}
 			map.put("sort", sort);
 		}
-		if (userJob.getUser() != null && userJob.getUser().getRealname() != null) {
-			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
+		if (userJob.getCompany() != null && userJob.getCompany().getName() != "") {
+			map.put("comname", StringUtil.formatLike(userJob.getCompany().getName()));
 		}
 		if (userJob.getJob() != null && userJob.getJob().getName() != null) {
 			map.put("jobname", StringUtil.formatLike(userJob.getJob().getName()));

@@ -141,7 +141,10 @@
 		<if test="jobname!=null">
 			and j.name like #{jobname}
 		</if>
-		<if test="realname!=null">
+		<if test="username!=null and username !=''">
+			and u.username like #{username}
+		</if>
+		<if test="realname!=null and realname !=''">
 			and u.realname like #{realname}
 		</if>
 	</select>
@@ -178,7 +181,10 @@
 		<if test="jobname!=null">
 			and j.name like #{jobname}
 		</if>
-		<if test="realname!=null">
+		<if test="username!=null and username !=''">
+			and u.username like #{username}
+		</if>
+		<if test="realname!=null and realname !=''">
 			and u.realname like #{realname}
 		</if>
 		<if test="sort!=null and sort!='' and order!=null and order!=''">
@@ -213,7 +219,8 @@
 		<if test="userId!=null">
 			and v.userid = #{userId}
 		</if>
-		<if test="jobname!=null">
+
+		<if test="jobname!=null and jobname!=''">
 			and j.name like #{jobname}
 		</if>
 		<if test="realname!=null">
@@ -242,7 +249,10 @@
 		inner join company com on j.companyid= com.id
 		where v.userid = #{userid}
 
-		<if test="jobname!=null">
+		<if test="comname!=null and comname!=''">
+			and com.name like #{comname}
+		</if>
+		<if test="jobname!=null and jobname!=''">
 			and j.name like #{jobname}
 		</if>
 		<if test="realname!=null">
@@ -256,21 +266,39 @@
 		</if>
 	</select>
 
-	<!-- 某个公司的所有申请实习成功的用户数量 -->
 	<select id="getTotlaAscUserJobsWithuser" parameterType="Map" resultType="Long">
 		select count(*)
-		from userwithjob v inner join job j on v.jobid = j.id
-		inner join user u
-		on v.userid = u.id
-		where v.userid =#{userid}
+		from job j
+		inner join userwithjob v on v.jobid = j.id
+		inner join user u on v.userid = u.id
+		inner join company com on j.companyid= com.id
+		where v.userid = #{userid}
 
-		<if test="jobname!=null">
+		<if test="comname!=null and comname!=''">
+			and com.name like #{comname}
+		</if>
+		<if test="jobname!=null and jobname!=''">
 			and j.name like #{jobname}
 		</if>
-		<if test="realname!=null">
-			and u.realname like #{realname}
-		</if>
 	</select>
+
+
+
+	<!-- 某个公司的所有申请实习成功的用户数量 -->
+	<!--<select id="getTotlaAscUserJobsWithuser" parameterType="Map" resultType="Long">-->
+		<!--select count(*)-->
+		<!--from userwithjob v inner join job j on v.jobid = j.id-->
+		<!--inner join user u-->
+		<!--on v.userid = u.id-->
+		<!--where v.userid =#{userid}-->
+
+		<!--<if test="jobname!=null">-->
+			<!--and j.name like #{jobname}-->
+		<!--</if>-->
+		<!--<if test="realname!=null">-->
+			<!--and u.realname like #{realname}-->
+		<!--</if>-->
+	<!--</select>-->
 
 
 </mapper>

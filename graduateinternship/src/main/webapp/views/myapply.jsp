@@ -21,9 +21,9 @@
 <body style="margin: 1px;" id="ff">
 	<div id="tb">
 		<div>
-			&nbsp;岗位名称：&nbsp;<input type="text" id="jobname" size="20"
+			&nbsp;实习单位名称：&nbsp;<input type="text" id="comname" size="20"
 				onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;
-			实习单位名称：&nbsp;<input type="text" id="comname" size="20"
+			岗位名称：&nbsp;<input type="text" id="jobname" size="20"
 				onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;&nbsp;<a
 				onclick="searchUserJob()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">搜索</a>
