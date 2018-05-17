@@ -72,7 +72,7 @@
             } ] ],
 			columns : [ [ {
 				field : 'user.username',
-				title : '用户名',
+				title : '学号',
 				width : 150,
 				sortable : true
 			}, {

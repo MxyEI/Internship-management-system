@@ -57,7 +57,7 @@
             <%--</div>--%>
 
             <button type="button" class="btn btn-primary block full-width m-b"
-                    onclick="reg();">提交</button>
+                    onclick="reg();">注册</button>
 
             <button type="button" class="btn btn-primary block full-width m-b"
                     onclick="comeb();">已有账号,去登陆</button>

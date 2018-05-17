@@ -59,7 +59,7 @@
 		var password = $("#password").val();
 		var usertype = $("#usertype").val();
 		if (username == null || username == "") {
-			alert("用户名不能为空！");
+			alert("用户名或学号不能为空！");
 			return;
 		}
 		if (password == null || password == "") {

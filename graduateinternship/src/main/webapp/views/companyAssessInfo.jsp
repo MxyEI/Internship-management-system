@@ -22,7 +22,7 @@
 
 <div id="tb">
 	<div>
-		&nbsp;岗位名称：&nbsp;<input type="text" id="jobname" size="20"
+		&nbsp;学号：&nbsp;<input type="text" id="username" size="20"
 								onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;
 		真实姓名：&nbsp;<input type="text" id="realname" size="20"
 						  onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;&nbsp;<a
@@ -74,7 +74,7 @@
             } ] ],
             columns : [ [ {
                 field : 'user.username',
-                title : '用户名',
+                title : '学号',
                 width : 150,
                 sortable : true
             }, {
@@ -128,7 +128,7 @@
 
     function searchUserJob() {
         $("#dg").datagrid('load', {
-            "job.name" : $("#jobname").val(),
+            "user.username" : $("#username").val(),
             "user.realname" : $("#realname").val()
         });
     }

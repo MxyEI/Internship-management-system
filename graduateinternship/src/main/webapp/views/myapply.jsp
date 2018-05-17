@@ -23,7 +23,7 @@
 		<div>
 			&nbsp;岗位名称：&nbsp;<input type="text" id="jobname" size="20"
 				onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;
-			真实姓名：&nbsp;<input type="text" id="realname" size="20"
+			实习单位名称：&nbsp;<input type="text" id="comname" size="20"
 				onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;&nbsp;<a
 				onclick="searchUserJob()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">搜索</a>
@@ -132,7 +132,7 @@
 	function searchUserJob() {
 		$("#dg").datagrid('load', {
 			"job.name" : $("#jobname").val(),
-			"user.realname" : $("#realname").val()
+			"company.name" : $("#comname").val()
 		});
 	}
 </script>
