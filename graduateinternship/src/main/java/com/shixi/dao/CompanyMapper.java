@@ -31,7 +31,7 @@ public interface CompanyMapper {
 	 * @author: mxy
 	 * @date: 2018年5月18日 下午12:54:40
 	 */
-	Long getAllComInfoWithNewAddCounts();
+	Long getAllComInfoWithNewAddCounts(Map<String, Object> map);
 
 	int updateByPrimaryKeySelective(Company record);
 

@@ -246,6 +246,12 @@ public class CompanyController {
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
 		}
+		if (companyJobVO.getJob() != null&&companyJobVO.getJob().getName()!="") {
+			map.put("jobname", companyJobVO.getJob().getName());
+		}
+		if (companyJobVO.getCompany() != null&&companyJobVO.getCompany().getName()!="") {
+			map.put("comname", companyJobVO.getCompany().getName());
+		}
 
 		List<CompanyJobVO> list = companyService.getAllJobInfoWithNewAdd(map);
 		Long total = companyService.getAllJobInfoWithNewAddCounts(map);
@@ -276,9 +282,17 @@ public class CompanyController {
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
 		}
+		if (company.getName() != null && company.getName()!="") {
+			map.put("name", company.getName());
+		}
+
+		if (company.getAddress() != null && company.getAddress() !="") {
+			map.put("address", company.getAddress());
+		}
+
 
 		List<Company> list = companyService.getAllComInfoWithNewAdd(map);
-		Long total = companyService.getAllComInfoWithNewAddCounts();
+		Long total = companyService.getAllComInfoWithNewAddCounts(map);
 		JSONObject result = new JSONObject();
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		result.put("rows", jsonArray);

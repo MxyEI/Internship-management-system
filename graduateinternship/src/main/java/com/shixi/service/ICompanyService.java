@@ -23,7 +23,7 @@ public interface ICompanyService {
 
 	//审核新注册的实习单位信息
 	List<Company> getAllComInfoWithNewAdd(Map<String, Object> map);
-	Long getAllComInfoWithNewAddCounts();
+	Long getAllComInfoWithNewAddCounts(Map<String, Object> map);
 
 	int updateByPrimaryKeySelective(Company record);
 

@@ -25,12 +25,30 @@
 	<select id="getAllJobInfoWithNewAddCounts" parameterType="Map" resultType="Long">
 		select  count(*)
 		from job j  inner join company com on j.companyid= com.id
+		<where>
+			<if test="comname != null and comname !=''">
+				and com.name like #{comname}
+			</if>
+
+			<if test="jobname != null and jobname !=''">
+				and j.name like #{jobname}
+			</if>
+		</where>
 	</select>
 
 	<!-- 管理部门查询实习单位发布的新岗位信息 -->
 	<select id="getAllJobInfoWithNewAdd" parameterType="Map" resultMap="CompanyJobAscResultMap">
 		select  j.id as jId,j.name as jName,j.gmtCreate as jGmtCreate,j.gmtModify as jGmtModify,com.id as cId,com.name as comName,j.success as jSuccess
 		from job j  inner join company com on j.companyid= com.id
+		<where>
+			<if test="comname != null and comname !=''">
+				and com.name like #{comname}
+			</if>
+
+			<if test="jobname != null and jobname !=''">
+				and j.name like #{jobname}
+			</if>
+		</where>
 		<if test="sort!=null and sort!='' and order!=null and order!=''">
 			order by ${sort} ${order}
 		</if>

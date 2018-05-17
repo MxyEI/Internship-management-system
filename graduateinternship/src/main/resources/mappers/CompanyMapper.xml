@@ -32,15 +32,35 @@
 
 
   <!-- 新注册的实习单位待审核的数量 -->
-  <select id="getAllComInfoWithNewAddCounts"  resultType="Long">
+  <select id="getAllComInfoWithNewAddCounts" parameterType="Map" resultType="Long">
     select  count(*)
     from company com
+    <where>
+      <if test="name != null and name!=''">
+        and com.name like #{name}
+      </if>
+
+      <if test="address != null and address!=''">
+        and com.address like #{address}
+      </if>
+
+    </where>
   </select>
 
   <!-- 新注册的实习单位待审核的信息 -->
   <select id="getAllComInfoWithNewAdd" parameterType="Map" resultMap="BaseResultMap">
     select *
     from company com
+    <where>
+      <if test="name != null and name!=''">
+        and com.name like #{name}
+      </if>
+
+      <if test="address != null and address!=''">
+        and com.address like #{address}
+      </if>
+
+    </where>
     <if test="sort!=null and sort!='' and order!=null and order!=''">
       order by ${sort} ${order}
     </if>

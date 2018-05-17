@@ -51,8 +51,8 @@ public class CompanyServiceImpl implements ICompanyService {
 	}
 
 	@Override
-	public Long getAllComInfoWithNewAddCounts() {
-		return companyMapper.getAllComInfoWithNewAddCounts();
+	public Long getAllComInfoWithNewAddCounts(Map<String, Object> map) {
+		return companyMapper.getAllComInfoWithNewAddCounts(map);
 	}
 
 	@Override

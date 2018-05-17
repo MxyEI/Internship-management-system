@@ -22,10 +22,10 @@
 <div id="tb">
 	<div>
 		&nbsp;实习单位名称：&nbsp;<input type="text" id="comname" size="20"
-								onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;
+								onkeydown="if(event.keyCode==13) searchcom()" />&nbsp;
 		地址：&nbsp;<input type="text" id="comaddr" size="20"
-						  onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;&nbsp;<a
-			onclick="searchUserJob()" class="easyui-linkbutton"
+						  onkeydown="if(event.keyCode==13) searchcom()" />&nbsp;&nbsp;<a
+			onclick="searchcom()" class="easyui-linkbutton"
 			iconCls="icon-search" plain="true">搜索</a>
 	</div>
 </div>
@@ -160,7 +160,7 @@
         return str.toString();
     }
 
-    function searchUserJob() {
+    function searchcom() {
         $("#dg").datagrid('load', {
             "name" : $("#comname").val(),
             "address" : $("#comaddr").val()

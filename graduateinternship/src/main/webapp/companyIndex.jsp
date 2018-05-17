@@ -49,20 +49,26 @@
 					href="javascript:openTab(' 公司信息','companyInfo.jsp','icon-wenzhang')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-wenzhang'"
-					style="width: 150px;"> 实习单位信息</a> <a
-					href="javascript:openTab(' 岗位信息','jobInfo.jsp','icon-wenzhang')"
-					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-wenzhang'"
-					style="width: 150px;"> 岗位管理</a> <a
-					href="javascript:openTab(' 招聘信息','recruitInfo.jsp','icon-wenzhang')"
-					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-wenzhang'"
-					style="width: 150px;"> 招聘信息</a> <a
-					href="javascript:openTab(' 申请信息','resumeInfo.jsp','icon-wenzhang')"
-					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-wenzhang'"
-					style="width: 150px;"> 申请信息</a>
+					style="width: 150px;"> 实习单位信息</a>
 			</div>
+
+			<div title="岗位招聘管理"
+				 data-options="selected:true,iconCls:'icon-wenzhangs'"
+				 style="padding: 10px; height: 10px;">
+				<a href="javascript:openTab(' 岗位信息','jobInfo.jsp','icon-wenzhang')"
+						class="easyui-linkbutton"
+						data-options="plain:true,iconCls:'icon-wenzhang'"
+						style="width: 150px;"> 岗位管理</a>
+				<a href="javascript:openTab(' 招聘信息','recruitInfo.jsp','icon-wenzhang')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-wenzhang'"
+					style="width: 150px;"> 招聘信息</a>
+				<a href="javascript:openTab(' 申请信息','resumeInfo.jsp','icon-wenzhang')"
+						class="easyui-linkbutton"
+						data-options="plain:true,iconCls:'icon-wenzhang'"
+						style="width: 150px;"> 申请信息</a>
+			</div>
+
 			<div title="实习管理"
 				data-options="selected:true,iconCls:'icon-wenzhangs'"
 				style="padding: 10px; height: 10px;">

@@ -21,11 +21,11 @@
 <body style="margin: 1px;" id="ff">
 	<div id="tb">
 		<div>
-			&nbsp;岗位名称：&nbsp;<input type="text" id="jobname" size="20"
-				onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;
-			真实姓名：&nbsp;<input type="text" id="realname" size="20"
-				onkeydown="if(event.keyCode==13) searchUserJob()" />&nbsp;&nbsp;<a
-				onclick="searchUserJob()" class="easyui-linkbutton"
+			&nbsp;学号：&nbsp;<input type="text" id="username" size="20"
+				onkeydown="if(event.keyCode==13) searchUser()" />
+			<%--&nbsp;真实姓名：&nbsp;<input type="text" id="realname" size="20"--%>
+				<%--onkeydown="if(event.keyCode==13) searchUserJob()" />--%>
+			&nbsp;&nbsp;<a onclick="searchUser()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">搜索</a>
 		</div>
 	</div>
@@ -187,10 +187,10 @@
             + id + "' target='_blank'>查看简历</a>";
     }
 
-	function searchUserJob() {
+	function searchUser() {
 		$("#dg").datagrid('load', {
-			"job.name" : $("#jobname").val(),
-			"user.realname" : $("#realname").val(),
+			"user.username" : $("#username").val(),
+//			"user.realname" : $("#realname").val(),
 			"companyId":getCookie("id")
 		});
 	}
