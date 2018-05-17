@@ -72,6 +72,9 @@
 			</if>
 		</where>
 		)
+		<if test="username!=null and username!=''">
+			and u.username like #{username}
+		</if>
 		<if test="userId!=null">
 			and v.userid = #{userId}
 		</if>
@@ -101,8 +104,12 @@
 			<if test="companyId!=null">
 				and companyid=#{companyId}
 			</if>
+
 		</where>
 		)
+		<if test="username!=null and username!=''">
+			and u.username=#{username}
+		</if>
 		<if test="userId!=null">
 			and v.userid = #{userId}
 		</if>
