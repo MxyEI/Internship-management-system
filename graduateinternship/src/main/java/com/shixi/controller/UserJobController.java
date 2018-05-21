@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.common.Result;
 import com.common.ResultGenerator;
 import com.shixi.entity.PageBean;
-import com.shixi.entity.UserJob;
 import com.shixi.entity.vo.UserJobVO;
 import com.shixi.service.IUserJobService;
 import com.shixi.util.DateUtil;
@@ -241,14 +240,17 @@ public class UserJobController {
 	 * @author: hw
 	 * @date: 2018年3月28日 下午1:53:07
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{userid}/{jobid}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result get(@PathVariable(value = "id") Integer id) throws Exception {
-		if (id == null) {
+	public Result get(@PathVariable(value = "userid") Integer userid,@PathVariable(value = "jobid") Integer jobid) throws Exception {
+		if (userid == null||jobid == null) {
 			return ResultGenerator.genFailResult("ERROR");
 		}
-		UserWithJob result = userJobService.selectByPrimaryKey(id);
-		log.info("request: userjob/get , id " + id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userid",userid);
+		map.put("jobid",jobid);
+		UserWithJob result = userJobService.selectByuidjid(map);
+		log.info("request: userjob/get , userid,jobid: " + userid+","+jobid);
 		if (result != null) {
 			Map<String, UserWithJob> data = new HashMap<String, UserWithJob>();
 			data.put("data", result);

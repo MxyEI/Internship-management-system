@@ -21,6 +21,8 @@ public interface IUserJobService {
 
 	UserWithJob selectByPrimaryKey(Integer id);
 
+	UserWithJob selectByuidjid(Map map);
+
 	int updateByPrimaryKeySelective(UserWithJob record);
 
 	int updateByPrimaryKey(UserWithJob record);

@@ -85,8 +85,10 @@
 	var about_editor;
 	//岗位id
 	var jId = getQueryStringByName("jId");
+    console.log("jId "+jId);
 	//用户工作关联表的主键
-    var vId = getQueryStringByName("vId");
+    //var vId = getQueryStringByName("vId");
+    var vId;
 
 	$(function() {
 		jobDescribe_editor = KindEditor.create('textarea[id="jobDescribe"]', {
@@ -108,16 +110,17 @@
 			type : "GET",
 			async : false,
 			url : "${pageContext.request.contextPath}/userJobs/"
-					+ vId,
+					+ getCookie("id")+"/"+jId,
 			success : function(result) {
 				if (result.resultCode == 200 && result.data != null
 						&& result.data.data != null
 						&& result.data.data.jobId != null) {
-					if (isNull(jId) || result.data.data.jobId == jId) {
-						jId = result.data.data.jobId + "";
-						setSuccess(result.data.data.success);
-						$("#apply").text("取消申请");
-					} else if (isNotNull(jId)) {
+				    		vId=result.data.data.id;
+							if (isNull(jId) || result.data.data.jobId == jId) {
+							jId = result.data.data.jobId + "";
+							setSuccess(result.data.data.success);
+							$("#apply").text("取消申请");
+						} else if (isNotNull(jId)) {
 						//$("#apply").hide();
 						$("#spzt").hide();
 					}
@@ -154,7 +157,7 @@
 				}
 			},
 			error : function() {
-				alert("异常！");
+				alert("异常！请刷新后重试");
 			}
 		});
 	};
@@ -218,7 +221,7 @@
 				}
 			},
 			error : function() {
-				alert("异常！");
+				alert("异常！请刷新后重试");
 			}
 		});
 	}

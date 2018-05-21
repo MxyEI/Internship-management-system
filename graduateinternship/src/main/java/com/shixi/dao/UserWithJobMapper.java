@@ -1,7 +1,8 @@
 package com.shixi.dao;
 
-import com.shixi.entity.UserJob;
 import com.shixi.entity.UserWithJob;
+
+import java.util.Map;
 
 /**
  * @Description: 用户岗位关联Mapper
@@ -20,4 +21,6 @@ public interface UserWithJobMapper {
 	int updateByPrimaryKeySelective(UserWithJob record);
 
 	int updateByPrimaryKey(UserWithJob record);
+
+	UserWithJob selectByuidjid(Map map);
 }

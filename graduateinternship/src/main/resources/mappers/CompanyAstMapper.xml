@@ -80,7 +80,6 @@
 	<resultMap extends="CompanyJobsResultMap" id="CompanyAscUsersResultMap"
 		type="com.shixi.entity.vo.CompanyVO">
 		<collection property="userJobVOs" ofType="com.shixi.entity.vo.UserJobVO">
-			<id column="companyId" property="id" />
 			<result column="vId" property="id" />
 			<result column="jCompanyId" property="companyId" />
 			<result column="vSuccess" property="success" />
@@ -232,7 +231,7 @@
 			</if>
 			and (j.lapse=0||j.lapse is null)
 		</where>
-		and j.success=1
+		and j.success=1 and c.success=1
 	</select>
 	<!-- 用户申请某个岗位后，公司如果批准，就可以通过用户id查找公司的信息 -->
 	<select id="findCompanyInfoByUserId" parameterType="java.lang.Integer"
