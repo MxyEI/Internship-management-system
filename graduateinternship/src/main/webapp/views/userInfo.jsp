@@ -65,12 +65,12 @@
 							onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 							readonly="readonly" /></td>
 					</tr>
-					<tr>
-						<th>联系电话</th>
-						<td><input name="phoneNumber" type="text"
-							validType='phoneNum' class="easyui-numberbox"
-							data-options="min:0" id="phoneNumber"></td>
-					</tr>
+					<%--<tr>--%>
+						<%--<th>联系电话</th>--%>
+						<%--<td><input name="phoneNumber" type="text"--%>
+							<%--validType='phoneNum' class="easyui-numberbox"--%>
+							<%--data-options="min:0" id="phoneNumber"></td>--%>
+					<%--</tr>--%>
 					<tr>
 						<th>email</th>
 						<td><input name="email" type="text" validType='email'
@@ -128,21 +128,22 @@
 			"phoneNumber" : $('#phoneNumber').val(),
 			"email" : $('#email').val()
 		};
-		$.ajax({
-			type : "PATCH",
-			url : "${pageContext.request.contextPath}/users",
-			data : data,
-			success : function(result) {
-				if (result.resultCode == 200) {
-					alert("更新成功！");
-				} else {
-					alert("更新失败! 错误代码:" + result.resultCode);
-				}
-			},
-			error : function() {
-				alert("异常！");
-			}
-		});
+		console.log(data);
+        $.ajax({
+            type : "PATCH",
+            url : "${pageContext.request.contextPath}/users",
+            data : data,
+            success : function(result) {
+                if (result.resultCode == 200) {
+                    alert("更新成功！");
+                } else {
+                    alert("更新失败! 错误代码:" + result.resultCode);
+                }
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
 	}
 </script>
 </html>
