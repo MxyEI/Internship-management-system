@@ -26,7 +26,25 @@
 		select
 		<include refid="Base_Column_List" />
 		from userwithjob
-		where userid = #{userid,jdbcType=INTEGER} and jobid = #{jobid,jdbcType=INTEGER}
+		where userid = #{userid,jdbcType=INTEGER}
+		<if test="jobid != null">
+			and jobid = #{jobid,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectByuid" parameterType="Map"
+			resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from userwithjob
+		where userid = #{userid,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByuidCounts" parameterType="Map"
+			resultType="Long">
+		select count(*)
+		from userwithjob
+		where userid = #{userid,jdbcType=INTEGER}
 	</select>
 
 	<!-- 审批成功的不能取消申请 -->

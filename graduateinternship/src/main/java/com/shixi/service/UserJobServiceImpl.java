@@ -51,6 +51,16 @@ public class UserJobServiceImpl implements IUserJobService {
 	}
 
 	@Override
+	public List<UserWithJob> selectByuid(Map map) {
+		return userJobMapper.selectByuid(map);
+	}
+
+	@Override
+	public Long selectByuidCounts(Map map) {
+		return userJobMapper.selectByuidCounts(map);
+	}
+
+	@Override
 	public int updateByPrimaryKeySelective(UserWithJob record) {
 		return userJobMapper.updateByPrimaryKeySelective(record);
 	}

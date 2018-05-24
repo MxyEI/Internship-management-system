@@ -147,34 +147,84 @@
 		return "批准";
 	}
 
-	function sendResume(success, id,userid) {
-		$.ajax({
-			type : "PATCH",
-			url : "${pageContext.request.contextPath}/userJobs",
-			data : {
-				"id" : id,
-				"userid":userid,
-				"success" : !success
-			},
-			success : function(result) {
-				if (result.resultCode == 200) {
-					$("#dg").datagrid("reload");
-				} else {
-					$.messager.alert("系统提示", "操作失败");
-				}
-				;
-			},
-			error : function() {
-				$.messager.alert("系统提示", "操作失败");
-			}
-		});
+	function sendResume(success, id,userid,jobid) {
+		var existsuc=false;
+		if(success==false){
+            $.ajax({
+                type : "get",
+                url : "${pageContext.request.contextPath}/userJobs/uid/"+userid,
+                success : function(result) {
+                    console.log(result.data.length);
+                    for(var i=0;i<result.data.length;i++){
+                        if(result.data[i].success==true){
+                            console.log("success2::"+result.data[i].success);
+                            existsuc=true;
+						}else {
+                            existsuc=false;
+                            console.log("exitsuc:"+existsuc)
+						}
+					}
+                    if(existsuc==false){
+                        $.ajax({
+                            type : "PATCH",
+                            url : "${pageContext.request.contextPath}/userJobs",
+                            data : {
+                                "id" : id,
+                                "userid":userid,
+                                "success" : true
+                            },
+                            success : function(result) {
+                                if (result.resultCode == 200) {
+                                    $("#dg").datagrid("reload");
+                                } else {
+                                    $.messager.alert("系统提示", "操作失败");
+                                }
+                            },
+                            error : function() {
+                                $.messager.alert("系统提示", "操作失败");
+                            }
+                        });
+                    }else{
+                        $.messager.alert("系统提示", "该学生已经存在被批准的单位");
+                    }
+
+                },
+                error : function() {
+                    $.messager.alert("系统提示", "操作失败");
+                }
+            });
+		}else{
+            $.ajax({
+                type : "PATCH",
+                url : "${pageContext.request.contextPath}/userJobs",
+                data : {
+                    "id" : id,
+                    "userid":userid,
+                    "success" : !success
+                },
+                success : function(result) {
+                    if (result.resultCode == 200) {
+                        $("#dg").datagrid("reload");
+                    } else {
+                        $.messager.alert("系统提示", "操作失败");
+                    }
+                    ;
+                },
+                error : function() {
+                    $.messager.alert("系统提示", "操作失败");
+                }
+            });
+		}
+
+
+
 	}
 
 	function formatHref(val, row) {
         //<a onclick='sendResume(row.success,row.id) class='easyui-linkbutton' iconCls='icon-ok'> resume(row.success)</a><a onclick='seejianli(row)'>查看简历</a>
 		var str = new StringBuffer();
 		str.append("<a onclick='sendResume(");
-		str.append(row.success).append(",").append(row.id).append(",").append(row.user.id);
+		str.append(row.success).append(",").append(row.id).append(",").append(row.user.id).append(",").append(row.job.id);
 		str.append(")' class='easyui-linkbutton' iconCls='icon-ok'>");
 		str.append(resume(row.success));
 		str.append("</a> ");

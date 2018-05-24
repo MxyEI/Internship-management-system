@@ -2,6 +2,7 @@ package com.shixi.dao;
 
 import com.shixi.entity.UserWithJob;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,4 +24,6 @@ public interface UserWithJobMapper {
 	int updateByPrimaryKey(UserWithJob record);
 
 	UserWithJob selectByuidjid(Map map);
+	List<UserWithJob> selectByuid(Map map);
+	Long selectByuidCounts(Map map);
 }

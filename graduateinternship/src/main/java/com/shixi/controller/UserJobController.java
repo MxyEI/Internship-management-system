@@ -260,6 +260,32 @@ public class UserJobController {
 		}
 	}
 
+
+	/**
+	 * @Description: 获取用户是否申请成功了岗位,只允许申请成功一个单位
+	 * @param 用户工作关联表id:vId
+	 * @author: hw
+	 * @date: 2018年3月28日 下午1:53:07
+	 */
+	@RequestMapping(value = "/uid/{userid}", method = RequestMethod.GET)
+	@ResponseBody
+	public Result getsuccessed(@PathVariable(value = "userid") Integer userid,HttpServletResponse response) throws Exception {
+		if (userid == null) {
+			return ResultGenerator.genFailResult("ERROR");
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userid",userid);
+		List<UserWithJob> list = userJobService.selectByuid(map);
+		Long total = userJobService.selectByuidCounts(map);
+		log.info("request: userjob/get , userid: " + userid);
+
+		Result result = ResultGenerator.genSuccessResult();
+		result.setData(list);
+		log.info("request: userjobs/list , map: " + map.toString());
+		return result;
+	}
+
+
 	/**
 	 * @Description: 取消申请
 	 * @author: hw
