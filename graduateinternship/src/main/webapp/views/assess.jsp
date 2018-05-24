@@ -92,7 +92,7 @@
                     $('#id').val(result.data.currentAssess.id);
                     assesscontent.html(result.data.currentAssess.assesscontent);
                     if(getCookie("usertype")!=type){
-                        $('#userid').val(getCookie("id"));
+                        $('#userid').val(userId);
                     }else{
                         $('#userid').val(result.data.currentAssess.id);
                     }
