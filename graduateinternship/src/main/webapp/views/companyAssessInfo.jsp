@@ -93,11 +93,6 @@
                 width : 150,
                 sortable : true
             }, {
-                field : 'gmtModify',
-                title : '修改时间',
-                width : 200,
-                sortable : true
-            }, {
                 field : 'action',
                 title : '操作',
                 width : 100,

@@ -125,7 +125,7 @@
 			"realname" : $("#realname").val(),
 			"sex" : $("input[name='sex']:checked").val(),
 			"birthday" : $("#birthday").val(),
-			"phoneNumber" : $('#phoneNumber').val(),
+            "phoneNumber" : $('#phoneNumber').val(),
 			"email" : $('#email').val()
 		};
 		console.log(data);
