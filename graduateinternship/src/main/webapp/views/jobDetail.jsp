@@ -224,6 +224,9 @@
 				alert("异常！请刷新后重试");
 			}
 		});
+
+		//刷新页面
+        location.reload();
 	}
 
 	function setSuccess(success) {
