@@ -53,8 +53,8 @@
 </div>
 </body>
 <script type="text/javascript">
-    //var userId = getQueryStringByName("userid");
-    var userId = getCookie("id");
+    var userId = getQueryStringByName("userid");
+
     $(function() {
         //实习鉴定表编辑器
         assesscontent = KindEditor.create('textarea[id="assesscontent"]', {
@@ -92,7 +92,7 @@
                     $('#id').val(result.data.currentAssess.id);
                     assesscontent.html(result.data.currentAssess.assesscontent);
                     if(getCookie("usertype")!=type){
-                        $('#userid').val(userId);
+                        $('#userid').val(getCookie("id"));
                     }else{
                         $('#userid').val(result.data.currentAssess.id);
                     }
