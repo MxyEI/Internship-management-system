@@ -54,6 +54,11 @@
 <script type="text/javascript">
 
     $(function() {
+        if("teacher"==getCookie("usertype")){
+            document.getElementById("bc").setAttribute("style","");
+        }else{
+            document.getElementById("bc").setAttribute("style","display:none");
+        }
         //实习鉴定表编辑器
         content = KindEditor.create('textarea[id="content"]', {
             height:"800px",
