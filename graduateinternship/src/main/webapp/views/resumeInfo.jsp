@@ -159,9 +159,7 @@
                         if(result.data[i].success==true){
                             console.log("success2::"+result.data[i].success);
                             existsuc=true;
-						}else {
-                            existsuc=false;
-                            console.log("exitsuc:"+existsuc)
+                            break;
 						}
 					}
                     if(existsuc==false){
