@@ -54,7 +54,7 @@
 </body>
 <script type="text/javascript">
     var userId = getQueryStringByName("userid");
-
+    var type= "student";
     $(function() {
         //实习鉴定表编辑器
         assesscontent = KindEditor.create('textarea[id="assesscontent"]', {
@@ -78,7 +78,6 @@
     function setassessInfo() {
         var urlstr;
 
-        var type= "student";
         if(getCookie("usertype")!=type){
             urlstr = "${pageContext.request.contextPath}/assess/assessbyuid/"+userId;
         }else{
@@ -94,7 +93,7 @@
                     if(getCookie("usertype")!=type){
                         $('#userid').val(userId);
                     }else{
-                        $('#userid').val(result.data.currentAssess.id);
+                        $('#userid').val(getCookie("id"));
                     }
 
                 }
@@ -106,18 +105,22 @@
     }
     function saveInfo() {
         var method;
+        var data;
         var id = $('#id').val();
         if (isNull(id)) {
             method = "POST";
+            data = {
+                "assesscontent" : assesscontent.html(),
+                "userid": getCookie("id")
+            };
         } else {
             method = "PATCH";
+            data = {
+                "id": $('#id').val(),
+                "assesscontent" : assesscontent.html(),
+                "userid": $('#userid').val()
+            };
         }
-
-        var data = {
-            "id": $('#id').val(),
-            "assesscontent" : assesscontent.html(),
-            "userid": $('#userid').val()
-        };
         console.log(data);
         $.ajax({
             type : method,
