@@ -109,10 +109,18 @@
         var id = $('#id').val();
         if (isNull(id)) {
             method = "POST";
-            data = {
-                "assesscontent" : assesscontent.html(),
-                "userid": getCookie("id")
-            };
+            if(getCookie("usertype")==type){
+                data = {
+                    "assesscontent" : assesscontent.html(),
+                    "userid": getCookie("id")
+                };
+            }else {
+                data = {
+                    "assesscontent" : assesscontent.html(),
+                    "userid": $('#userid').val()
+                };
+            }
+
         } else {
             method = "PATCH";
             data = {
