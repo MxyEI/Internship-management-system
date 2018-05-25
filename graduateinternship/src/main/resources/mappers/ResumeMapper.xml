@@ -124,11 +124,11 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.shixi.entity.Resume">
+	<update id="updateByPrimaryKeyWithResume" parameterType="com.shixi.entity.Resume">
 		update resume
 		<set>
 			<if test="realname != null">
-				realname = #{username,jdbcType=VARCHAR},
+				realname = #{realname,jdbcType=VARCHAR},
 			</if>
 			<if test="major != null">
 				major = #{major,jdbcType=VARCHAR},
@@ -137,7 +137,7 @@
 				skill = #{skill,jdbcType=VARCHAR},
 			</if>
 			<if test="course != null">
-				course = #{course,usertype,jdbcType=VARCHAR},
+				course = #{course,jdbcType=VARCHAR},
 			</if>
 			<if test="project != null">
 				project = #{project,jdbcType=CHAR},

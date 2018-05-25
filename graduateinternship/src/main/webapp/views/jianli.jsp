@@ -148,6 +148,7 @@
             urlstr = "${pageContext.request.contextPath}/personresume/"+userId;
             //如果不是学生则把保存按钮隐藏
             document.getElementById('bcanniu').style.display="none";
+
         }else{
             urlstr = "${pageContext.request.contextPath}/personresume/"+getCookie("id");
             document.getElementById('bcanniu').style.display="";
@@ -157,7 +158,7 @@
             url : urlstr,
             success : function(result) {
                 if (result.resultCode == 200) {
-
+                    $('#id').val(result.data.currentResume.id);
                     $('#realname').val(result.data.currentResume.realname);
                     $('#major').val(result.data.currentResume.major);
                     course.html(result.data.currentResume.course);
@@ -180,7 +181,7 @@
             method = "PATCH";
         }
         var data = {
-//            "id" : getCookie("id"),
+            "id" : $("#id").val(),
             "realname" : $("#realname").val(),
             "major" : $("#major").val(),
             "course" : course.html(),
@@ -189,6 +190,8 @@
             "hobbies" : hobbies.html(),
             "studentid": getCookie("id")
         };
+        console.log(data);
+        console.log(method)
         $.ajax({
             type : method,
             url : "${pageContext.request.contextPath}/personresume",
