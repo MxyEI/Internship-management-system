@@ -46,7 +46,7 @@
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-wenzhang'"
 					style="width: 150px;"> 修改密码</a><a
-					href="javascript:openTab(' 公司信息','companyInfo.jsp','icon-wenzhang')"
+					href="javascript:openTab(' 实习单位信息','companyInfo.jsp','icon-wenzhang')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-wenzhang'"
 					style="width: 150px;"> 实习单位信息</a>
