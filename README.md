@@ -1,4 +1,4 @@
-# GraduateInternship
+# 实习管理系统
 
 32位md5加密
 
